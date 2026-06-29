@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klassik & Oper verstehen – Lern-App</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e0b16;
+  --bg2:#161121;
+  --panel:#1c1730;
+  --panel2:#241d3b;
+  --ink:#f3eefb;
+  --muted:#b3a8cf;
+  --gold:#e7c46b;
+  --gold2:#d4a73c;
+  --wine:#7c2d4a;
+  --wine2:#a23a5f;
+  --accent:#9b7bd6;
+  --line:rgba(231,196,107,.16);
+  --good:#6fcf97;
+  --warn:#e9b04b;
+  --bad:#e07a7a;
+  --shadow:0 18px 50px rgba(0,0,0,.45);
+  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:var(--sans);color:var(--ink);
+  background:
+    radial-gradient(1200px 600px at 80% -10%,rgba(124,45,74,.35),transparent 60%),
+    radial-gradient(900px 500px at -10% 10%,rgba(155,123,214,.22),transparent 55%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
+  background-attachment:fixed;
+  line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+a{color:var(--gold)}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:700;line-height:1.15;margin:0 0 .4em}
+header.top{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(10px);
+  background:rgba(14,11,22,.82);
+  border-bottom:1px solid var(--line);
+}
+.top-inner{max-width:1080px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;margin-right:auto}
+.logo{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;
+  background:linear-gradient(145deg,var(--gold),var(--gold2));color:#1a1326;font-size:22px;box-shadow:var(--shadow)}
+.brand b{font-family:var(--serif);font-size:21px;letter-spacing:.3px}
+.brand span{display:block;font-size:11.5px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;font-family:var(--sans)}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav button{
+  font-family:var(--sans);font-size:13.5px;font-weight:600;color:var(--muted);
+  background:transparent;border:1px solid transparent;border-radius:999px;padding:8px 13px;cursor:pointer;transition:.18s}
+nav button:hover{color:var(--ink);background:rgba(255,255,255,.05)}
+nav button.active{color:#1a1326;background:linear-gradient(145deg,var(--gold),var(--gold2));border-color:transparent}
+main{max-width:1080px;margin:0 auto;padding:30px 20px 90px}
+.view{display:none;animation:fade .4s ease}
+.view.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero{
+  border-radius:22px;padding:48px 40px;margin-bottom:26px;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,rgba(124,45,74,.55),rgba(36,29,59,.7));
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.hero::after{content:"♪";position:absolute;right:24px;bottom:-22px;font-size:170px;color:rgba(231,196,107,.10);font-family:var(--serif)}
+.hero h1{font-size:clamp(30px,5vw,48px);margin-bottom:.2em}
+.hero p{max-width:640px;color:#e9e2f6;font-size:17px}
+.kicker{display:inline-block;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.card{
+  background:linear-gradient(160deg,var(--panel),var(--panel2));
+  border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+.card h3{font-size:22px;color:var(--ink)}
+.card .ic{font-size:26px;margin-bottom:8px;display:block}
+.muted{color:var(--muted)}
+.section-head{margin:6px 0 22px}
+.section-head h2{font-size:clamp(26px,4vw,38px)}
+.section-head p{color:var(--muted);max-width:720px;margin:0}
+.pill{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;background:rgba(231,196,107,.14);color:var(--gold);border:1px solid var(--line)}
+hr.sep{border:none;border-top:1px solid var(--line);margin:30px 0}
+.epoch{border-left:3px solid var(--gold2);padding-left:18px;margin-bottom:22px}
+.epoch h3{font-size:24px;margin-bottom:2px}
+.epoch .yrs{color:var(--gold);font-weight:700;font-size:13px;letter-spacing:1px}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.tag{font-size:12.5px;background:rgba(155,123,214,.16);border:1px solid rgba(155,123,214,.3);color:#d9ccf5;padding:4px 10px;border-radius:8px}
+.listen{margin-top:10px;font-size:14px;background:rgba(111,207,151,.08);border:1px solid rgba(111,207,151,.25);border-radius:10px;padding:10px 14px}
+.listen b{color:var(--good)}
+table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14.5px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--gold);font-family:var(--sans);font-size:12px;letter-spacing:1px;text-transform:uppercase}
+tr:hover td{background:rgba(255,255,255,.03)}
+.stage-wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;align-items:start}
+@media(max-width:820px){.stage-wrap{grid-template-columns:1fr}.stage-mobilehint{display:block}}
+.stage{background:radial-gradient(120% 100% at 50% 0,rgba(124,45,74,.25),transparent 70%),var(--panel);
+  border:1px solid var(--line);border-radius:18px;padding:14px}
+.stage svg{width:100%;height:auto;display:block}
+.seg{cursor:pointer;transition:.15s}
+.seg:hover{filter:brightness(1.25)}
+.seg.sel{stroke:var(--gold);stroke-width:2.5}
+.info-panel{background:linear-gradient(160deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:22px;min-height:200px;box-shadow:var(--shadow)}
+.info-panel h3{font-size:23px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.legend span{font-size:12px;display:flex;align-items:center;gap:6px;color:var(--muted)}
+.dot{width:12px;height:12px;border-radius:3px;display:inline-block}
+.crit{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line)}
+.crit:last-child{border-bottom:none}
+.crit .n{flex:0 0 42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:20px;
+  background:linear-gradient(145deg,var(--wine2),var(--wine));box-shadow:var(--shadow)}
+.crit h4{font-size:19px;margin:0 0 3px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+@media(max-width:620px){.vs{grid-template-columns:1fr}}
+.vs .col{border-radius:12px;padding:14px}
+.vs .ok{background:rgba(111,207,151,.08);border:1px solid rgba(111,207,151,.28)}
+.vs .no{background:rgba(224,122,122,.08);border:1px solid rgba(224,122,122,.28)}
+.vs h4{font-size:15px;margin-bottom:8px}
+.vs .ok h4{color:var(--good)}.vs .no h4{color:var(--bad)}
+.vs ul{margin:0;padding-left:18px;font-size:14px}
+.vs li{margin-bottom:6px}
+.cond{display:flex;gap:14px;align-items:flex-start}
+.cond .av{flex:0 0 52px;height:52px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:18px;font-weight:700;color:#1a1326;background:linear-gradient(145deg,var(--gold),var(--gold2))}
+.cond h4{font-size:20px;margin:0}
+.cond .role{color:var(--gold);font-size:12.5px;font-weight:600;letter-spacing:.5px}
+.quiz-box{max-width:760px;margin:0 auto}
+.q{background:linear-gradient(160deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:var(--shadow)}
+.q .qnum{color:var(--gold);font-weight:700;letter-spacing:1px;font-size:13px}
+.q h3{font-size:23px;margin:6px 0 18px}
+.opt{display:block;width:100%;text-align:left;font-family:var(--sans);font-size:15px;color:var(--ink);
+  background:rgba(255,255,255,.03);border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--accent);background:rgba(155,123,214,.1)}
+.opt.correct{border-color:var(--good);background:rgba(111,207,151,.16)}
+.opt.wrong{border-color:var(--bad);background:rgba(224,122,122,.16)}
+.opt:disabled{cursor:default}
+.explain{margin-top:8px;font-size:14px;color:var(--muted);background:rgba(255,255,255,.03);border-radius:10px;padding:12px 14px;border:1px solid var(--line)}
+.quiz-foot{display:flex;justify-content:space-between;align-items:center;margin-top:18px;gap:12px;flex-wrap:wrap}
+.btn{font-family:var(--sans);font-weight:700;font-size:14px;border:none;border-radius:999px;padding:11px 22px;cursor:pointer;
+  background:linear-gradient(145deg,var(--gold),var(--gold2));color:#1a1326;box-shadow:var(--shadow)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.progress{height:7px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:22px}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--wine2));width:0;transition:.4s}
+.result{text-align:center;padding:40px 20px}
+.result .score{font-family:var(--serif);font-size:64px;color:var(--gold);line-height:1}
+.search{width:100%;font-family:var(--sans);font-size:15px;color:var(--ink);background:var(--panel);
+  border:1.5px solid var(--line);border-radius:12px;padding:13px 16px;margin-bottom:18px}
+.search:focus{outline:none;border-color:var(--gold2)}
+.gloss dt{font-family:var(--serif);font-size:20px;color:var(--gold);margin-top:16px}
+.gloss dd{margin:4px 0 0;color:#e3dcf2;font-size:14.5px}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{position:relative;padding:14px 0 14px 52px;border-bottom:1px solid var(--line)}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:12px;width:34px;height:34px;border-radius:10px;
+  display:grid;place-items:center;font-family:var(--serif);font-weight:700;color:#1a1326;background:linear-gradient(145deg,var(--gold),var(--gold2))}
+.steps li b{display:block;font-size:16px;margin-bottom:2px;font-family:var(--serif);color:var(--ink)}
+footer{max-width:1080px;margin:0 auto;padding:0 20px 50px;color:var(--muted);font-size:13px;text-align:center}
+.stage-mobilehint{display:none;color:var(--muted);font-size:13px;margin-top:8px}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.note{font-size:12.5px;color:var(--muted);font-style:italic;margin-top:6px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <div class="logo">♬</div>
+      <div><b>Klassik &amp; Oper verstehen</b><span>Hören · Erkennen · Genießen</span></div>
+    </div>
+    <nav id="nav"></nav>
+  </div>
+</header>
+
+<main>
+  <!-- START -->
+  <section class="view active" id="start">
+    <div class="hero">
+      <span class="kicker">Eine Lern-App</span>
+      <h1>Klassische Musik &amp; Oper verstehen</h1>
+      <p>Vom ratlosen Zuhören zum bewussten Genießen: Diese App zeigt dir, wie ein Orchester aufgebaut ist, wie eine Oper funktioniert, woran man eine <em>gute</em> Interpretation erkennt – und wo heute die besten Orchester und Dirigenten zu Hause sind.</p>
+      <div class="cta">
+        <button class="btn" onclick="go('orchester')">Orchester entdecken</button>
+        <button class="btn ghost" onclick="go('interpretation')">Qualität erkennen lernen</button>
+      </div>
+    </div>
+
+    <div class="grid g3">
+      <div class="card"><span class="ic">🏛️</span><h3>Epochen &amp; Komponisten</h3><p class="muted">Barock bis Moderne – wer zählt, was sie auszeichnet und worauf man beim Hören achtet.</p></div>
+      <div class="card"><span class="ic">🎭</span><h3>Oper verstehen</h3><p class="muted">Aufbau, Stimmfächer und die großen Werke – damit du der Handlung und den Stimmen folgen kannst.</p></div>
+      <div class="card"><span class="ic">🎻</span><h3>Das Orchester</h3><p class="muted">Interaktiver Sitzplan: Klick dich durch die Instrumentengruppen und ihre Rolle.</p></div>
+      <div class="card"><span class="ic">⭐</span><h3>Interpretation</h3><p class="muted">Die Kriterien, an denen Profis eine Aufnahme messen – mit „gut vs. weniger gut".</p></div>
+      <div class="card"><span class="ic">🌍</span><h3>Beste Orchester &amp; Dirigenten</h3><p class="muted">Die großen Klangkörper der Welt und die prägenden Dirigenten – damals und heute.</p></div>
+      <div class="card"><span class="ic">🧠</span><h3>Quiz &amp; Glossar</h3><p class="muted">Teste dein Wissen und schlage jeden Fachbegriff nach.</p></div>
+    </div>
+
+    <hr class="sep">
+    <div class="card">
+      <span class="pill">So nutzt du die App</span>
+      <h3 style="margin-top:12px">Drei Wege zum Ohr</h3>
+      <p class="muted">Du musst keine Noten lesen können. Beginne mit dem <b>Orchester</b>, um die Klangfarben zuzuordnen. Lies dann <b>Interpretation</b>, um zu verstehen, <em>worauf</em> man hört. Und nimm dir die <b>Höranleitung</b> als Begleiter für deine erste bewusste Hörsession. Anschließend testet das <b>Quiz</b>, was hängengeblieben ist.</p>
+    </div>
+  </section>
+
+  <!-- EPOCHEN -->
+  <section class="view" id="epochen">
+    <div class="section-head">
+      <span class="pill">Geschichte</span>
+      <h2>Epochen &amp; Komponisten</h2>
+      <p>Wer „klassische Musik" sagt, meint meist vier große Epochen. Jede klingt anders – und wenn du die Klangsprache kennst, ordnest du ein Stück oft schon nach wenigen Takten ein.</p>
+    </div>
+
+    <div class="epoch">
+      <span class="yrs">ca. 1600–1750</span>
+      <h3>Barock</h3>
+      <p class="muted">Verzierte, kontrapunktische Musik mit gleichmäßigem Puls und Generalbass. Klein besetzte Ensembles, Cembalo statt Klavier. Wirkt wie ein kunstvoll geknüpfter Teppich aus Stimmen.</p>
+      <div class="tags"><span class="tag">Bach</span><span class="tag">Händel</span><span class="tag">Vivaldi</span><span class="tag">Telemann</span><span class="tag">Purcell</span></div>
+      <div class="listen"><b>Worauf hören:</b> Mehrere gleichberechtigte Stimmen, die sich umspielen (Fuge), durchlaufender Bass, klare Terrassendynamik (laut/leise als Stufen, nicht als Übergang).</div>
+    </div>
+
+    <div class="epoch">
+      <span class="yrs">ca. 1750–1820</span>
+      <h3>Klassik (Wiener Klassik)</h3>
+      <p class="muted">Klarheit, Balance und Form. Melodie mit Begleitung, klare Phrasen wie Sätze in einer Sprache. Hier entsteht die Sinfonie und das Streichquartett in ihrer bekannten Form.</p>
+      <div class="tags"><span class="tag">Haydn</span><span class="tag">Mozart</span><span class="tag">Beethoven (früh/mittel)</span></div>
+      <div class="listen"><b>Worauf hören:</b> Ebenmäßige, „sprechende" Phrasen, Frage-Antwort-Motive, Sonatensatzform (Thema – Durchführung – Wiederkehr), eleganter, durchsichtiger Klang.</div>
+    </div>
+
+    <div class="epoch">
+      <span class="yrs">ca. 1820–1900</span>
+      <h3>Romantik</h3>
+      <p class="muted">Gefühl, Erzählung und Farbe. Größere Orchester, kühne Harmonien, weite Steigerungen. Musik will eine Geschichte oder Stimmung ausdrücken.</p>
+      <div class="tags"><span class="tag">Beethoven (spät)</span><span class="tag">Schubert</span><span class="tag">Brahms</span><span class="tag">Tschaikowsky</span><span class="tag">Wagner</span><span class="tag">Verdi</span><span class="tag">Chopin</span></div>
+      <div class="listen"><b>Worauf hören:</b> Große dynamische Bögen, rubato (flexibles Tempo), reiche Harmonik, Leitmotive, üppige Streicher- und Bläserfarben.</div>
+    </div>
+
+    <div class="epoch">
+      <span class="yrs">ca. 1900–heute</span>
+      <h3>Moderne &amp; 20./21. Jahrhundert</h3>
+      <p class="muted">Aufbruch in alle Richtungen: Impressionismus, Atonalität, Neoklassik, Minimal Music. Regeln werden hinterfragt und neu erfunden.</p>
+      <div class="tags"><span class="tag">Debussy</span><span class="tag">Mahler</span><span class="tag">Strauss</span><span class="tag">Strawinsky</span><span class="tag">Schönberg</span><span class="tag">Schostakowitsch</span><span class="tag">Pärt</span></div>
+      <div class="listen"><b>Worauf hören:</b> Ungewohnte Klangfarben und Rhythmen, schwebende oder fehlende Tonart, starke Kontraste – und Musik, die bewusst irritieren darf.</div>
+    </div>
+
+    <hr class="sep">
+    <div class="card">
+      <h3>Die „großen Namen" – grobe Landkarte</h3>
+      <table>
+        <tr><th>Komponist</th><th>Epoche</th><th>Berühmt für</th></tr>
+        <tr><td>J. S. Bach</td><td>Barock</td><td>Brandenburgische Konzerte, Matthäus-Passion, Wohltemperiertes Klavier</td></tr>
+        <tr><td>Mozart</td><td>Klassik</td><td>Opern (Zauberflöte, Don Giovanni), Sinfonien, Klavierkonzerte, Requiem</td></tr>
+        <tr><td>Beethoven</td><td>Klassik→Romantik</td><td>9 Sinfonien (v. a. 5. &amp; 9.), Klaviersonaten, Streichquartette</td></tr>
+        <tr><td>Schubert</td><td>Romantik</td><td>Lieder, „Unvollendete", Streichquintett</td></tr>
+        <tr><td>Brahms</td><td>Romantik</td><td>4 Sinfonien, Deutsches Requiem, Kammermusik</td></tr>
+        <tr><td>Wagner</td><td>Romantik</td><td>Musikdramen (Ring, Tristan), Leitmotiv-Technik</td></tr>
+        <tr><td>Verdi</td><td>Romantik</td><td>Italienische Opern (La Traviata, Aida, Otello)</td></tr>
+        <tr><td>Mahler</td><td>Spätromantik</td><td>Riesige Sinfonien voller Welt und Abgrund</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- OPER -->
+  <section class="view" id="oper">
+    <div class="section-head">
+      <span class="pill">Bühne</span>
+      <h2>Oper verstehen</h2>
+      <p>Oper ist Theater mit Musik: gesungenes Drama. Wenn du den Bauplan und die Stimmtypen kennst, verlierst du nie den Faden – auch ohne jedes Wort zu verstehen.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <span class="ic">🧱</span>
+        <h3>Der Bauplan einer Oper</h3>
+        <table>
+          <tr><th>Element</th><th>Funktion</th></tr>
+          <tr><td>Ouvertüre / Vorspiel</td><td>Instrumentale Eröffnung, stimmt auf Stimmung &amp; Themen ein.</td></tr>
+          <tr><td>Rezitativ</td><td>Sprechgesang, treibt die Handlung voran (der „Dialog").</td></tr>
+          <tr><td>Arie</td><td>Solo-Gesangsnummer; die Figur hält inne und zeigt Gefühl (der „Monolog").</td></tr>
+          <tr><td>Duett / Ensemble</td><td>Zwei oder mehr Figuren singen zusammen – oft mit Konflikt.</td></tr>
+          <tr><td>Chor</td><td>Volk, Hochzeitsgäste, Soldaten – die Menge als Klangmasse.</td></tr>
+          <tr><td>Finale</td><td>Großer Akt-Abschluss, in dem alle Fäden zusammenlaufen.</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <span class="ic">🎙️</span>
+        <h3>Die Stimmfächer</h3>
+        <p class="muted">Von hoch nach tief. Komponisten besetzen Rollen bewusst: Helden oft Tenor, Verführer/Väter oft Bariton/Bass, junge Heldinnen oft Sopran.</p>
+        <table>
+          <tr><th>Stimme</th><th>Lage</th><th>Typische Rolle</th></tr>
+          <tr><td>Sopran</td><td>Frau, hoch</td><td>Heldin, junge Liebende</td></tr>
+          <tr><td>Mezzosopran</td><td>Frau, mittel</td><td>Vertraute, Verführerin, „Hosenrolle"</td></tr>
+          <tr><td>Alt</td><td>Frau, tief</td><td>Mutter, ältere Figur</td></tr>
+          <tr><td>Tenor</td><td>Mann, hoch</td><td>Held, Liebhaber</td></tr>
+          <tr><td>Bariton</td><td>Mann, mittel</td><td>Gegenspieler, Vater</td></tr>
+          <tr><td>Bass</td><td>Mann, tief</td><td>König, Priester, Bösewicht</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <hr class="sep">
+    <div class="card">
+      <h3>Einstiegswerke – große Opern zum Reinkommen</h3>
+      <table>
+        <tr><th>Oper</th><th>Komponist</th><th>Warum ein guter Einstieg</th></tr>
+        <tr><td>Die Zauberflöte</td><td>Mozart</td><td>Märchenhaft, eingängige Melodien, deutsch gesungen.</td></tr>
+        <tr><td>La Bohème</td><td>Puccini</td><td>Direkte Gefühle, große Melodien, kurze, klare Handlung.</td></tr>
+        <tr><td>Carmen</td><td>Bizet</td><td>Voller Ohrwürmer, packende Geschichte.</td></tr>
+        <tr><td>La Traviata</td><td>Verdi</td><td>Tragische Liebe, berühmte Arien.</td></tr>
+        <tr><td>Der Ring des Nibelungen</td><td>Wagner</td><td>Für Fortgeschrittene: 16 Stunden Mythos &amp; Leitmotive.</td></tr>
+      </table>
+      <div class="listen" style="margin-top:16px"><b>Tipp:</b> Lies vorher eine kurze Inhaltsangabe und höre 2–3 berühmte Arien an. Beim Hören/Sehen folgst du dann der Musik, statt mit der Übersetzung zu kämpfen. Viele Häuser zeigen Übertitel.</div>
+    </div>
+  </section>
+
+  <!-- ORCHESTER -->
+  <section class="view" id="orchester">
+    <div class="section-head">
+      <span class="pill">Klangkörper</span>
+      <h2>Das Orchester</h2>
+      <p>Ein Sinfonieorchester ist nach Klangfamilien geordnet – wie ein Halbrund um den Dirigenten. Klick auf eine Gruppe im Sitzplan, um sie kennenzulernen.</p>
+    </div>
+
+    <div class="stage-wrap">
+      <div class="stage">
+        <svg viewBox="0 0 600 440" role="img" aria-label="Orchester-Sitzplan">
+          <defs>
+            <radialGradient id="floor" cx="50%" cy="8%" r="90%">
+              <stop offset="0%" stop-color="#2a2140"/><stop offset="100%" stop-color="#15101f"/>
+            </radialGradient>
+          </defs>
+          <rect x="20" y="20" width="560" height="400" rx="24" fill="url(#floor)" stroke="rgba(231,196,107,.18)"/>
+          <path d="M70 360 A 230 230 0 0 1 530 360" fill="none" stroke="rgba(255,255,255,.05)"/>
+          <path d="M120 360 A 175 175 0 0 1 480 360" fill="none" stroke="rgba(255,255,255,.05)"/>
+          <path d="M170 360 A 120 120 0 0 1 430 360" fill="none" stroke="rgba(255,255,255,.05)"/>
+
+          <g class="seg" data-k="v1"><path d="M150 360 A 120 120 0 0 1 280 245 L 296 360 Z" fill="#9b7bd6"/><text x="205" y="335" font-size="13" fill="#1a1326" font-weight="700">1. Violinen</text></g>
+          <g class="seg" data-k="v2"><path d="M320 245 A 120 120 0 0 1 450 360 L 304 360 Z" fill="#8a68c9"/><text x="345" y="335" font-size="13" fill="#1a1326" font-weight="700">2. Violinen</text></g>
+          <g class="seg" data-k="va"><path d="M180 250 A 175 175 0 0 1 300 200 L 286 240 A 120 120 0 0 0 196 296 Z" fill="#7d57c2"/><text x="212" y="242" font-size="11" fill="#fff" font-weight="700">Bratschen</text></g>
+          <g class="seg" data-k="vc"><path d="M300 200 A 175 175 0 0 1 420 250 L 404 296 A 120 120 0 0 0 314 240 Z" fill="#6f48b3"/><text x="345" y="242" font-size="11" fill="#fff" font-weight="700">Celli</text></g>
+          <g class="seg" data-k="cb"><rect x="446" y="246" width="64" height="36" rx="9" fill="#5c3a96"/><text x="452" y="269" font-size="10" fill="#fff" font-weight="700">Kontrab.</text></g>
+
+          <g class="seg" data-k="ww"><rect x="220" y="150" width="160" height="46" rx="12" fill="#e7c46b"/><text x="244" y="178" font-size="13" fill="#1a1326" font-weight="700">Holzbläser</text></g>
+          <g class="seg" data-k="br"><rect x="200" y="92" width="200" height="44" rx="12" fill="#c98a3a"/><text x="262" y="119" font-size="13" fill="#1a1326" font-weight="700">Blechbläser</text></g>
+          <g class="seg" data-k="pe"><rect x="412" y="92" width="120" height="44" rx="12" fill="#a23a5f"/><text x="430" y="119" font-size="12" fill="#fff" font-weight="700">Schlagwerk</text></g>
+          <g class="seg" data-k="hp"><rect x="68" y="150" width="90" height="44" rx="12" fill="#6fcf97"/><text x="92" y="178" font-size="12" fill="#1a1326" font-weight="700">Harfe</text></g>
+
+          <g class="seg" data-k="co"><circle cx="300" cy="392" r="22" fill="#e7c46b" stroke="#fff" stroke-width="2"/><text x="289" y="397" font-size="11" fill="#1a1326" font-weight="700">Dir.</text></g>
+        </svg>
+        <div class="legend">
+          <span><i class="dot" style="background:#7d57c2"></i>Streicher</span>
+          <span><i class="dot" style="background:#e7c46b"></i>Holzbläser</span>
+          <span><i class="dot" style="background:#c98a3a"></i>Blechbläser</span>
+          <span><i class="dot" style="background:#a23a5f"></i>Schlagwerk</span>
+          <span><i class="dot" style="background:#6fcf97"></i>Harfe</span>
+        </div>
+        <p class="stage-mobilehint">Tippe auf eine Gruppe, um Details zu sehen.</p>
+      </div>
+      <div class="info-panel" id="orchInfo">
+        <span class="pill">Sitzplan</span>
+        <h3 style="margin-top:12px">Klick auf eine Gruppe</h3>
+        <p class="muted">Das klassische Sitzbild: Streicher vorn im Halbrund um den Dirigenten, dahinter die Holzbläser, dann Blech und Schlagwerk. Je weiter hinten, desto lauter das Instrument – so bleibt die Balance gewahrt.</p>
+      </div>
+    </div>
+
+    <hr class="sep">
+    <div class="card">
+      <h3>Warum diese Anordnung?</h3>
+      <p class="muted">Die leisen, zahlreichen Streicher sitzen vorn und bilden das Fundament (oft 60 % der Musiker). Die durchdringenden Bläser und das Schlagwerk sitzen hinten und höher, damit ihr Klang über die Streicher hinweg ins Publikum trägt. Der Dirigent steht im Brennpunkt des Halbrunds – jeder kann ihn sehen, und der Klang läuft bei ihm zusammen. Die genaue Aufstellung variiert: Manche Dirigenten setzen die zweiten Violinen rechts gegenüber den ersten („deutsche Sitzordnung"), um einen Stereo-Effekt zu erzeugen.</p>
+    </div>
+  </section>
+
+  <!-- INTERPRETATION -->
+  <section class="view" id="interpretation">
+    <div class="section-head">
+      <span class="pill">Das Ohr schulen</span>
+      <h2>Interpretation &amp; Qualität erkennen</h2>
+      <p>Zwei Orchester spielen dieselben Noten – und doch klingt es völlig verschieden. „Gut" heißt nicht nur „fehlerfrei", sondern <em>überzeugend</em>. Das sind die Kriterien, an denen Profis und Kritiker eine Interpretation messen.</p>
+    </div>
+
+    <div class="card">
+      <div class="crit"><div class="n">⏱️</div><div><h4>Tempo &amp; Puls</h4><p class="muted">Passt die Geschwindigkeit zum Charakter? Ein guter Puls trägt; er ist stabil, aber nicht mechanisch. Achte auf das <em>rubato</em> – das minimale Dehnen und Drängen, das Musik atmen lässt.</p></div></div>
+      <div class="crit"><div class="n">🔊</div><div><h4>Dynamik &amp; Spannungsbogen</h4><p class="muted">Echte Pianissimi und ein Fortissimo mit Reserve. Eine gute Interpretation baut über Minuten Spannung auf und löst sie gezielt – statt durchweg „mittellaut" zu bleiben.</p></div></div>
+      <div class="crit"><div class="n">🎯</div><div><h4>Intonation</h4><p class="muted">Sauberkeit der Tonhöhe. Verstimmte Akkorde, kratzige Höhen oder „schwimmende" Bläser sind hörbare Schwächen – reine, tragende Akkorde ein Zeichen von Klasse.</p></div></div>
+      <div class="crit"><div class="n">🤝</div><div><h4>Ensemble &amp; Präzision</h4><p class="muted">Spielt das Orchester wie <em>ein</em> Instrument? Einsätze gemeinsam, Läufe wie aus einem Guss, Pausen exakt gleich. „Zusammen" ist schwerer, als es klingt.</p></div></div>
+      <div class="crit"><div class="n">🗣️</div><div><h4>Phrasierung &amp; Artikulation</h4><p class="muted">Wie wird die Melodie „ausgesprochen"? Gute Musiker formen Phrasen wie Sätze, mit Betonungen, Bögen und Atempunkten – statt Note für Note aneinanderzureihen.</p></div></div>
+      <div class="crit"><div class="n">🎨</div><div><h4>Klangbalance &amp; Klangfarbe</h4><p class="muted">Hört man die wichtige Stimme heraus, ohne dass Begleitung übertönt wird? Mischen sich die Farben zu einem warmen Ganzen, oder stechen Gruppen unschön hervor?</p></div></div>
+      <div class="crit"><div class="n">💡</div><div><h4>Aussage &amp; Kohärenz</h4><p class="muted">Das Schwerste: Hat die Interpretation eine <em>Idee</em>? Erzählt sie über den ganzen Satz hinweg etwas Schlüssiges – oder ist es eine Folge schöner, aber zusammenhangloser Momente?</p></div></div>
+    </div>
+
+    <hr class="sep">
+    <h3 style="font-family:var(--serif);font-size:26px">Gut vs. weniger gut – im direkten Vergleich</h3>
+    <div class="vs">
+      <div class="col ok">
+        <h4>✓ Überzeugende Interpretation</h4>
+        <ul>
+          <li>Stille wird ausgehalten; Pianissimo ist wirklich leise.</li>
+          <li>Spannung wächst über lange Bögen und entlädt sich gezielt.</li>
+          <li>Begleitstimmen treten zurück, Hauptstimme trägt.</li>
+          <li>Tempo „atmet", bleibt aber kohärent.</li>
+          <li>Reine Intonation, homogener Gruppenklang.</li>
+          <li>Man vergisst die Technik – man hört Musik.</li>
+        </ul>
+      </div>
+      <div class="col no">
+        <h4>✗ Schwächere Interpretation</h4>
+        <ul>
+          <li>Alles bleibt „mittellaut", keine echten Kontraste.</li>
+          <li>Tempo zieht an oder schleppt unmotiviert.</li>
+          <li>Klangbrei – wichtige Linien verschwinden.</li>
+          <li>Unsaubere Einsätze, „ausgefranste" Enden.</li>
+          <li>Intonationstrübungen, schrille Höhen.</li>
+          <li>Korrekt, aber gleichgültig – sagt nichts.</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="sep">
+    <div class="card">
+      <span class="pill">Profi-Methode</span>
+      <h3 style="margin-top:12px">Aufnahmen vergleichen</h3>
+      <p class="muted">Der schnellste Weg, das Ohr zu schulen: Höre dieselbe Stelle (z. B. die ersten zwei Minuten von Beethovens 5.) in zwei oder drei Aufnahmen direkt hintereinander. Plötzlich hörst du, was eine Entscheidung ist – ein langsamerer Beginn, ein schärferer Akzent, ein wärmerer Streicherklang. Genau dieses Vergleichen ist es, was Kritiker tun. Es gibt selten ein „richtig", aber es gibt überzeugend und beliebig.</p>
+      <p class="note">Begriffe wie „Referenzaufnahme" meinen eine Einspielung, die über Jahrzehnte als Maßstab gilt – nicht die einzig gültige Wahrheit.</p>
+    </div>
+  </section>
+
+  <!-- BESTE -->
+  <section class="view" id="beste">
+    <div class="section-head">
+      <span class="pill">Weltspitze</span>
+      <h2>Beste Orchester &amp; Dirigenten</h2>
+      <p>„Das beste" Orchester gibt es nicht objektiv – aber es gibt einen Kreis von Klangkörpern, die in jeder Kritiker-Rangliste auftauchen. Eine viel zitierte Rangliste des Magazins <em>Gramophone</em> dient hier als Orientierung.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <span class="ic">🌍</span>
+        <h3>Die großen Klangkörper</h3>
+        <table>
+          <tr><th>Orchester</th><th>Sitz</th><th>Chefdirigent</th></tr>
+          <tr><td>Royal Concertgebouw</td><td>Amsterdam</td><td>Klaus Mäkelä (ab Sept. 2027)</td></tr>
+          <tr><td>Berliner Philharmoniker</td><td>Berlin</td><td>Kirill Petrenko</td></tr>
+          <tr><td>Wiener Philharmoniker</td><td>Wien</td><td>kein Chef – Gastdirigenten</td></tr>
+          <tr><td>London Symphony Orchestra</td><td>London</td><td>Antonio Pappano</td></tr>
+          <tr><td>Symphonieorchester des BR</td><td>München</td><td>Simon Rattle</td></tr>
+          <tr><td>Chicago Symphony</td><td>Chicago</td><td>Klaus Mäkelä (ab 2027/28)</td></tr>
+          <tr><td>Gewandhausorchester</td><td>Leipzig</td><td>Andris Nelsons</td></tr>
+          <tr><td>Sächsische Staatskapelle</td><td>Dresden</td><td>traditionsreicher Opernklang</td></tr>
+        </table>
+        <p class="note">Stand 2026. Die Wiener Philharmoniker verwalten sich selbst und haben bewusst keinen Chefdirigenten – beim Neujahrskonzert 2026 leitete erstmals Yannick Nézet-Séguin.</p>
+      </div>
+      <div class="card">
+        <span class="ic">🏙️</span>
+        <h3>Wo die Klassik zu Hause ist</h3>
+        <p class="muted">Drei Regionen prägen die Spitze:</p>
+        <p class="muted"><b style="color:var(--gold)">Deutschsprachiger Raum:</b> Wien, Berlin, München, Leipzig, Dresden – das historische Herz der Orchestertradition, mit dichtem Konzert- und Opernbetrieb.</p>
+        <p class="muted"><b style="color:var(--gold)">Großbritannien &amp; Niederlande:</b> London (gleich mehrere Spitzenorchester) und Amsterdam mit dem legendären Concertgebouw-Saal.</p>
+        <p class="muted"><b style="color:var(--gold)">USA:</b> die „Big Five" – Chicago, Boston, New York, Philadelphia, Cleveland – berühmt für brillante Präzision und Bläserkultur.</p>
+      </div>
+    </div>
+
+    <hr class="sep">
+    <h3 style="font-family:var(--serif);font-size:26px">Prägende Dirigenten</h3>
+    <p class="muted" style="margin-top:-6px">Der Dirigent ist kein „Taktgeber", sondern Gestalter: Er entscheidet über Tempo, Balance, Phrasierung und die große Linie. Diese Namen sollte man kennen.</p>
+
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card cond"><div class="av">HvK</div><div><h4>Herbert von Karajan</h4><div class="role">Legende · Berliner Philharmoniker</div><p class="muted">Prägte über Jahrzehnte einen makellosen, samtigen „Karajan-Sound" und die Schallplattenkultur wie kein anderer.</p></div></div>
+      <div class="card cond"><div class="av">LB</div><div><h4>Leonard Bernstein</h4><div class="role">Legende · New York / Wien</div><p class="muted">Glühende Emotionalität, charismatischer Vermittler. Seine Mahler-Aufnahmen gelten als Referenz.</p></div></div>
+      <div class="card cond"><div class="av">CK</div><div><h4>Carlos Kleiber</h4><div class="role">Kult · selten, aber legendär</div><p class="muted">Dirigierte wenig, aber seine Beethoven-5 &amp; -7 zählen zu den meistgerühmten Einspielungen überhaupt.</p></div></div>
+      <div class="card cond"><div class="av">KP</div><div><h4>Kirill Petrenko</h4><div class="role">Heute · Berliner Philharmoniker</div><p class="muted">Aktueller Chef in Berlin, gefeiert für detailgenaue, intensiv durchgearbeitete Interpretationen.</p></div></div>
+      <div class="card cond"><div class="av">GD</div><div><h4>Gustavo Dudamel</h4><div class="role">Heute · New York Philharmonic (ab 2026)</div><p class="muted">Charismatischer Publikumsmagnet, kam aus Venezuelas „El Sistema", zuvor lange in Los Angeles.</p></div></div>
+      <div class="card cond"><div class="av">KM</div><div><h4>Klaus Mäkelä</h4><div class="role">Zukunft · Concertgebouw &amp; Chicago (ab 2027)</div><p class="muted">Der gefeierte junge Finne, dem gleich zwei Weltorchester anvertraut werden – das Gesprächsthema der Branche.</p></div></div>
+      <div class="card cond"><div class="av">SR</div><div><h4>Simon Rattle</h4><div class="role">Heute · BR-Symphonieorchester München</div><p class="muted">Brite, früher Chef der Berliner Philharmoniker, bekannt für breites Repertoire und Vermittlungsarbeit.</p></div></div>
+      <div class="card cond"><div class="av">AN</div><div><h4>Andris Nelsons</h4><div class="role">Heute · Gewandhaus Leipzig &amp; Boston</div><p class="muted">Verbindet zwei Traditionshäuser, gefeiert u. a. für seinen Schostakowitsch-Zyklus.</p></div></div>
+    </div>
+  </section>
+
+  <!-- HÖRANLEITUNG -->
+  <section class="view" id="hoeren">
+    <div class="section-head">
+      <span class="pill">Praxis</span>
+      <h2>Höranleitung – aktiv zuhören</h2>
+      <p>Klassik „nebenbei" zu hören ist schön, aber bewusstes Hören erschließt sie wirklich. Nimm dir 20 ungestörte Minuten, gute Kopfhörer und folge diesen Schritten.</p>
+    </div>
+
+    <div class="card">
+      <ol class="steps">
+        <li><b>Such dir ein Stück mit Bezug</b>Beginne mit etwas Erzählerischem (Smetana „Die Moldau", Beethoven 5, Dvořák „Aus der Neuen Welt"). Lies vorab zwei Sätze über das Stück.</li>
+        <li><b>Hör es einmal ganz durch – ohne Analyse</b>Nur Eindruck sammeln: Wo wird es laut, leise, schnell, ruhig? Wo bekommst du Gänsehaut?</li>
+        <li><b>Folge einer einzigen Stimme</b>Beim zweiten Hören: Bleib bei den Celli oder der Oboe. Du wirst Linien entdecken, die vorher untergingen.</li>
+        <li><b>Achte auf die Übergänge</b>Wie kommt das Stück von leise zu gewaltig? Plötzlich oder als langer Aufbau? Genau dort entscheidet sich die Interpretation.</li>
+        <li><b>Vergleiche zwei Aufnahmen</b>Dieselbe Passage von zwei Dirigenten. Notiere in einem Satz, was anders ist – und welche dich mehr packt.</li>
+        <li><b>Geh ins Konzert</b>Live ist alles anders: die Wucht, die Stille, die Spannung im Saal. Nichts schult das Ohr schneller.</li>
+      </ol>
+    </div>
+
+    <hr class="sep">
+    <div class="card">
+      <span class="pill">Einstiegs-Playlist</span>
+      <h3 style="margin-top:12px">10 Stücke für den Anfang</h3>
+      <table>
+        <tr><th>Stück</th><th>Warum</th></tr>
+        <tr><td>Beethoven – 5. Sinfonie</td><td>Das berühmteste Motiv der Musikgeschichte; klarer Spannungsbogen.</td></tr>
+        <tr><td>Dvořák – Sinfonie „Aus der Neuen Welt"</td><td>Eingängige Melodien, große Gefühle.</td></tr>
+        <tr><td>Smetana – Die Moldau</td><td>Musik als Reise entlang eines Flusses – leicht zu „sehen".</td></tr>
+        <tr><td>Vivaldi – Die vier Jahreszeiten</td><td>Barock zum Anfassen, jede Jahreszeit ein Bild.</td></tr>
+        <tr><td>Mozart – Eine kleine Nachtmusik</td><td>Reine, durchsichtige Klassik.</td></tr>
+        <tr><td>Tschaikowsky – Schwanensee (Suite)</td><td>Ballettmelodien, die jeder kennt.</td></tr>
+        <tr><td>Bach – Air (aus Orchestersuite Nr. 3)</td><td>Ruhe und Schönheit des Barock.</td></tr>
+        <tr><td>Holst – Die Planeten („Mars", „Jupiter")</td><td>Filmische Wucht und Farbe.</td></tr>
+        <tr><td>Puccini – „Nessun dorma"</td><td>Der perfekte Einstieg in die Opernstimme.</td></tr>
+        <tr><td>Ravel – Boléro</td><td>Hörbares Crescendo &amp; Instrumentenkunde in einem.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="view" id="quiz">
+    <div class="section-head">
+      <span class="pill">Wissenscheck</span>
+      <h2>Quiz</h2>
+      <p>Zehn Fragen quer durch die App. Nach jeder Antwort siehst du die Erklärung.</p>
+    </div>
+    <div class="quiz-box">
+      <div class="progress"><i id="qbar"></i></div>
+      <div id="quizArea"></div>
+    </div>
+  </section>
+
+  <!-- GLOSSAR -->
+  <section class="view" id="glossar">
+    <div class="section-head">
+      <span class="pill">Nachschlagen</span>
+      <h2>Glossar</h2>
+      <p>Die wichtigsten Fachbegriffe in einfachen Worten. Tippe oben, um zu filtern.</p>
+    </div>
+    <input class="search" id="glossSearch" placeholder="Begriff suchen … (z. B. Rubato, Arie, Fuge)">
+    <dl class="gloss" id="glossList"></dl>
+  </section>
+</main>
+
+<footer>
+  <p>Klassik &amp; Oper verstehen · eine Lern-App · Inhalte zu Bildungszwecken. Orchester- und Dirigenten-Angaben Stand 2026.</p>
+</footer>
+
+<script>
+const views=[
+  ['start','Start'],['epochen','Epochen'],['oper','Oper'],['orchester','Orchester'],
+  ['interpretation','Interpretation'],['beste','Beste der Welt'],['hoeren','Höranleitung'],
+  ['quiz','Quiz'],['glossar','Glossar']
+];
+const nav=document.getElementById('nav');
+views.forEach(([id,label])=>{
+  const b=document.createElement('button');b.textContent=label;b.dataset.id=id;
+  b.onclick=()=>go(id);nav.appendChild(b);
+});
+function go(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));
+  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.id===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+go('start');
+
+const orch={
+  v1:{t:'Erste Violinen',d:'Tragen meist die Hauptmelodie und sitzen ganz vorn links. Angeführt vom Konzertmeister – dem „Sprecher" des Orchesters.'},
+  v2:{t:'Zweite Violinen',d:'Stützen die ersten Violinen, übernehmen Gegenstimmen und füllen die Harmonie. Kein „zweite Klasse" – oft das rhythmische Rückgrat.'},
+  va:{t:'Bratschen (Violen)',d:'Die Altstimme der Streicher: etwas größer und dunkler als die Violine. Geben dem Klang Wärme und Fülle in der Mitte.'},
+  vc:{t:'Violoncelli',d:'Singende Tenor-/Bassstimme. Liefern oft die schönsten melodischen Linien und ein warmes Fundament.'},
+  cb:{t:'Kontrabässe',d:'Das tiefe Fundament des ganzen Orchesters. Geben Bass und Wucht, sitzen meist hinten rechts.'},
+  ww:{t:'Holzbläser',d:'Flöte, Oboe, Klarinette, Fagott. Bringen charakterstarke Farben und Soli – jede klingt unverwechselbar.'},
+  br:{t:'Blechbläser',d:'Hörner, Trompeten, Posaunen, Tuba. Sorgen für Glanz, Kraft und feierliche Höhepunkte; sitzen hinten, damit sie nicht alles übertönen.'},
+  pe:{t:'Schlagwerk',d:'Pauken, Becken, Trommeln u. v. m. Geben Rhythmus, Akzente und dramatische Schläge. Die Pauke ist oft der „Donner" des Orchesters.'},
+  hp:{t:'Harfe',d:'Sorgt für glitzernde Arpeggien und himmlische Farbtupfer – besonders in romantischer und impressionistischer Musik.'},
+  co:{t:'Dirigent/in',d:'Steht im Brennpunkt und gestaltet Tempo, Balance, Dynamik und die große Linie. Gibt mit Gesten Einsätze und formt die Interpretation.'}
+};
+let selSeg=null;
+document.querySelectorAll('.seg').forEach(g=>{
+  g.addEventListener('click',()=>{
+    const k=g.dataset.k,info=orch[k];if(!info)return;
+    if(selSeg)selSeg.classList.remove('sel');
+    g.classList.add('sel');selSeg=g;
+    document.getElementById('orchInfo').innerHTML=
+      '<span class="pill">'+(['v1','v2','va','vc','cb'].includes(k)?'Streicher':k==='ww'?'Holzbläser':k==='br'?'Blechbläser':k==='pe'?'Schlagwerk':k==='hp'?'Harfe':'Leitung')+'</span>'+
+      '<h3 style="margin-top:12px">'+info.t+'</h3><p class="muted">'+info.d+'</p>';
+  });
+});
+
+const quiz=[
+  {q:'Welche Epoche kommt direkt vor der Romantik?',o:['Barock','Wiener Klassik','Moderne','Renaissance'],a:1,e:'Reihenfolge: Barock → Klassik → Romantik → Moderne. Vor der Romantik liegt die Wiener Klassik (Haydn, Mozart, Beethoven).'},
+  {q:'Was ist eine Arie?',o:['Ein instrumentales Vorspiel','Sprechgesang, der die Handlung vorantreibt','Eine Solo-Gesangsnummer, in der eine Figur Gefühl zeigt','Der Schlusschor einer Oper'],a:2,e:'Die Arie ist der „Monolog": Die Figur hält inne und drückt ihre Gefühle aus. Das Rezitativ dagegen treibt die Handlung voran.'},
+  {q:'Welche Instrumentengruppe sitzt in einem Sinfonieorchester ganz vorn?',o:['Blechbläser','Schlagwerk','Streicher','Holzbläser'],a:2,e:'Die leisen, zahlreichen Streicher sitzen vorn im Halbrund. Laute Bläser und Schlagwerk sitzen hinten, damit die Balance stimmt.'},
+  {q:'Was bedeutet „Rubato"?',o:['Sehr laut spielen','Flexibles Dehnen und Drängen des Tempos','Ohne Dirigent spielen','Ein Streichinstrument'],a:1,e:'Rubato ist das feine, ausdrucksvolle Flexibilisieren des Tempos – es lässt die Musik „atmen".'},
+  {q:'Welches Stimmfach ist typischerweise der Opernheld?',o:['Bass','Tenor','Alt','Bariton'],a:1,e:'Der Held ist oft Tenor (hohe Männerstimme). Väter und Gegenspieler sind häufig Bariton oder Bass.'},
+  {q:'Welches Orchester hat bewusst KEINEN festen Chefdirigenten?',o:['Berliner Philharmoniker','Wiener Philharmoniker','London Symphony Orchestra','Gewandhausorchester'],a:1,e:'Die Wiener Philharmoniker verwalten sich selbst und arbeiten mit Gastdirigenten statt einem festen Chef.'},
+  {q:'Wer ist aktueller Chefdirigent der Berliner Philharmoniker?',o:['Simon Rattle','Gustavo Dudamel','Kirill Petrenko','Andris Nelsons'],a:2,e:'Kirill Petrenko leitet die Berliner Philharmoniker. Rattle war es früher; Dudamel ging 2026 zu den New Yorker Philharmonikern.'},
+  {q:'Was ist KEIN Zeichen einer überzeugenden Interpretation?',o:['Echte dynamische Kontraste','Reine Intonation','Durchweg gleich laut, ohne Spannung','Klar hörbare Hauptstimme'],a:2,e:'„Immer mittellaut" ist eine Schwäche. Gute Interpretationen leben von Kontrast und einem bewussten Spannungsbogen.'},
+  {q:'Welche Gruppe gehört zu den Holzbläsern?',o:['Trompete','Oboe','Posaune','Pauke'],a:1,e:'Oboe (mit Flöte, Klarinette, Fagott) ist Holzbläser. Trompete/Posaune sind Blech, die Pauke ist Schlagwerk.'},
+  {q:'Welcher junge Dirigent übernimmt ab 2027 gleich Concertgebouw UND Chicago?',o:['Klaus Mäkelä','Yannick Nézet-Séguin','Antonio Pappano','Carlos Kleiber'],a:0,e:'Der Finne Klaus Mäkelä übernimmt ab 2027 beide Weltorchester – ein in der Branche viel diskutierter Schritt.'}
+];
+let qi=0,score=0,answered=false;
+const area=document.getElementById('quizArea');
+function renderQ(){
+  answered=false;
+  document.getElementById('qbar').style.width=(qi/quiz.length*100)+'%';
+  const item=quiz[qi];
+  let html='<div class="q"><div class="qnum">Frage '+(qi+1)+' / '+quiz.length+'</div><h3>'+item.q+'</h3>';
+  item.o.forEach((opt,i)=>{html+='<button class="opt" data-i="'+i+'">'+opt+'</button>';});
+  html+='<div id="exp"></div><div class="quiz-foot"><span class="muted">Punkte: <b id="sc">'+score+'</b></span><button class="btn" id="next" disabled>Weiter</button></div></div>';
+  area.innerHTML=html;
+  area.querySelectorAll('.opt').forEach(b=>b.onclick=()=>pick(parseInt(b.dataset.i)));
+  document.getElementById('next').onclick=()=>{qi++;qi<quiz.length?renderQ():finish();};
+}
+function pick(i){
+  if(answered)return;answered=true;
+  const item=quiz[qi];const opts=area.querySelectorAll('.opt');
+  opts.forEach((b,idx)=>{b.disabled=true;if(idx===item.a)b.classList.add('correct');if(idx===i&&i!==item.a)b.classList.add('wrong');});
+  if(i===item.a){score++;document.getElementById('sc').textContent=score;}
+  document.getElementById('exp').innerHTML='<div class="explain">'+(i===item.a?'✓ Richtig! ':'✗ Nicht ganz. ')+item.e+'</div>';
+  document.getElementById('next').disabled=false;
+  document.getElementById('next').textContent=qi===quiz.length-1?'Ergebnis':'Weiter';
+}
+function finish(){
+  document.getElementById('qbar').style.width='100%';
+  let msg=score>=9?'Maestro! Du hast ein feines Ohr.':score>=7?'Stark – du verstehst die Klassik schon richtig gut.':score>=5?'Solide Basis. Ein zweiter Durchgang lohnt sich.':'Ein guter Anfang – stöbere nochmal durch die App.';
+  area.innerHTML='<div class="q result"><div class="score">'+score+'/'+quiz.length+'</div><h3 style="margin-top:10px">'+msg+'</h3><button class="btn" onclick="restart()">Nochmal spielen</button></div>';
+}
+function restart(){qi=0;score=0;renderQ();}
+renderQ();
+
+const gloss=[
+  ['Arie','Solo-Gesangsstück in einer Oper, in dem eine Figur ihre Gefühle ausdrückt.'],
+  ['Artikulation','Wie einzelne Töne „ausgesprochen" werden – gebunden (legato) oder kurz (staccato).'],
+  ['Cembalo','Tasteninstrument des Barock; Saiten werden gezupft statt angeschlagen.'],
+  ['Chefdirigent','Künstlerischer Leiter eines Orchesters, prägt Stil und Programm.'],
+  ['Crescendo','Allmähliches Lauterwerden. Gegenteil: Decrescendo / Diminuendo.'],
+  ['Dynamik','Die Lautstärkegestaltung von leise (piano) bis laut (forte).'],
+  ['Ensemble','1) Eine Gruppe von Musikern. 2) Eine Opernnummer mit mehreren Sängern.'],
+  ['Fuge','Kunstvolle Satzform, in der ein Thema von mehreren Stimmen nacheinander aufgegriffen wird.'],
+  ['Generalbass','Barocke Bass-Begleitung, über der Akkorde frei ausgefüllt werden.'],
+  ['Intonation','Sauberkeit der Tonhöhe – das „Stimmen" der Töne zueinander.'],
+  ['Kammermusik','Musik für kleine Besetzung (z. B. Streichquartett), ohne Dirigent.'],
+  ['Konzertmeister','Erste(r) Geiger(in); Bindeglied zwischen Orchester und Dirigent.'],
+  ['Leitmotiv','Wiederkehrendes Motiv für Person, Idee oder Gegenstand (v. a. bei Wagner).'],
+  ['Libretto','Der Text einer Oper.'],
+  ['Opus (op.)','„Werk" – Nummerierung der Kompositionen eines Komponisten.'],
+  ['Ouvertüre','Instrumentale Eröffnung einer Oper oder eines größeren Werks.'],
+  ['Phrasierung','Das Gliedern und Formen von Melodien in sinnvolle „Sätze".'],
+  ['Pizzicato','Zupfen der Saiten statt Streichen mit dem Bogen.'],
+  ['Rezitativ','Sprechähnlicher Gesang, der die Handlung vorantreibt.'],
+  ['Rubato','Ausdrucksvolles, freies Dehnen und Drängen des Tempos.'],
+  ['Sinfonie','Großes mehrsätziges Orchesterwerk, meist in vier Sätzen.'],
+  ['Sonatensatzform','Klassische Form: Exposition – Durchführung – Reprise.'],
+  ['Stimmfach','Kategorie einer Singstimme nach Lage und Charakter (z. B. Sopran, Bass).'],
+  ['Tempo','Geschwindigkeit der Musik (z. B. Adagio = langsam, Allegro = schnell).'],
+  ['Tutti','Alle spielen zusammen (Gegenteil eines Soloparts).'],
+  ['Vibrato','Leichtes, regelmäßiges Schwanken der Tonhöhe für Wärme &amp; Ausdruck.']
+];
+const glossList=document.getElementById('glossList');
+function renderGloss(filter){
+  filter=filter||'';const f=filter.toLowerCase();glossList.innerHTML='';
+  gloss.forEach(function(pair){
+    var t=pair[0],d=pair[1];
+    if(f&&!(t.toLowerCase().indexOf(f)>-1||d.toLowerCase().indexOf(f)>-1))return;
+    const dt=document.createElement('dt');dt.textContent=t;
+    const dd=document.createElement('dd');dd.innerHTML=d;
+    glossList.appendChild(dt);glossList.appendChild(dd);
+  });
+  if(!glossList.children.length)glossList.innerHTML='<p class="muted">Kein Begriff gefunden.</p>';
+}
+renderGloss();
+document.getElementById('glossSearch').addEventListener('input',function(e){renderGloss(e.target.value);});
+</script>
+</body>
+</html>
