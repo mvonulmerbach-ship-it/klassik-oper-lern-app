@@ -2,767 +2,819 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Klassik & Oper lernen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#3f3a78">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Klassik">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<link rel="apple-touch-icon" href="icon-512.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Klassik">
+<title>Klassik & Oper lernen</title>
 <style>
 :root{
-  --bg:#f7f6f2;--panel:#ffffff;--panel2:#fbfaf6;
-  --ink:#1c1b18;--muted:#6b6862;
-  --primary:#3f3a78;--primary2:#5a2f6e;--primaryink:#ffffff;
-  --gold:#c79a2b;--gold2:#a87f1f;
-  --good:#3b6e58;--goodbg:#e7f0ea;--bad:#b4452f;--badbg:#f6e6e1;
-  --line:#e7e4dc;--soft:#efe9f6;
-  --shadow:0 10px 30px rgba(40,30,60,.08);
-  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color-scheme: light;
+  --bg:#f7f6f2; --card:#ffffff; --ink:#1c1b18; --muted:#6b6862; --line:#e7e4dc;
+  --brand:#3f3a78; --brand-soft:#e7f0ea; --accent:#6a4c93; --gold:#c9a227;
+  --good:#3f3a78; --good-soft:#e7f0ea; --bad:#b4452f; --bad-soft:#f6e6e1;
+  --shadow:0 1px 2px rgba(0,0,0,.05),0 6px 18px rgba(0,0,0,.06);
+  --radius:16px;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);
-  line-height:1.6;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
-a{color:var(--primary)}
-h1,h2,h3,h4{font-family:var(--sans);font-weight:700;line-height:1.2;margin:0 0 .4em;letter-spacing:-.01em}
-header.top{position:sticky;top:0;z-index:50;background:rgba(247,246,242,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.top-inner{max-width:1080px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:11px;margin-right:auto}
-.logo{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;
-  background:linear-gradient(150deg,var(--primary),var(--primary2));color:#e9c46d;font-size:21px;box-shadow:var(--shadow)}
-.brand b{font-size:18px;font-weight:800}
-.brand span{display:block;font-size:10.5px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase}
-nav{display:flex;gap:4px;flex-wrap:wrap}
-nav button{font-family:var(--sans);font-size:13.5px;font-weight:600;color:var(--muted);
-  background:transparent;border:1px solid transparent;border-radius:999px;padding:8px 13px;cursor:pointer;transition:.16s}
-nav button:hover{color:var(--ink);background:rgba(0,0,0,.04)}
-nav button.active{color:var(--primaryink);background:linear-gradient(150deg,var(--primary),var(--primary2))}
-main{max-width:1080px;margin:0 auto;padding:26px 18px 90px}
-.view{display:none;animation:fade .3s ease}
-.view.active{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.muted{color:var(--muted)}
-.pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  padding:4px 11px;border-radius:999px;background:rgba(199,154,43,.14);color:var(--gold2);border:1px solid rgba(199,154,43,.28)}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
-.grid{display:grid;gap:16px}
-.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
-.g4{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
-hr.sep{border:none;border-top:1px solid var(--line);margin:28px 0}
-.btn{font-family:var(--sans);font-weight:700;font-size:14px;border:none;border-radius:999px;padding:12px 22px;cursor:pointer;
-  background:linear-gradient(150deg,var(--primary),var(--primary2));color:var(--primaryink);box-shadow:var(--shadow);transition:.15s}
-.btn:hover{filter:brightness(1.08)}
-.btn:disabled{opacity:.4;cursor:default}
-.btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
-.btn.good{background:linear-gradient(150deg,#4a8a6e,var(--good));color:#fff}
-.btn.again{background:#fff;border:1.5px solid var(--bad);color:var(--bad)}
-.btn.sm{padding:8px 16px;font-size:13px}
-.hero{border-radius:20px;padding:38px;margin-bottom:22px;position:relative;overflow:hidden;
-  background:linear-gradient(135deg,var(--primary),var(--primary2));border:1px solid rgba(0,0,0,.06);box-shadow:var(--shadow);color:#fff}
-.hero::after{content:"\266C";position:absolute;right:22px;bottom:-34px;font-size:180px;color:rgba(233,196,109,.16)}
-.hero .pill{background:rgba(255,255,255,.16);color:#fff;border-color:rgba(255,255,255,.28)}
-.hero h1{font-size:clamp(27px,5vw,42px);margin-bottom:.15em;color:#fff}
-.hero p{max-width:600px;color:rgba(255,255,255,.9);font-size:16px}
-.hero .btn.ghost{border-color:rgba(255,255,255,.5);color:#fff}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:22px}
-.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;box-shadow:var(--shadow)}
-.stat .num{font-size:36px;font-weight:800;color:var(--primary);line-height:1}
-.stat .lbl{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
-.bar{height:8px;border-radius:999px;background:#eceae4;overflow:hidden;margin-top:10px}
-.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--primary),var(--gold));width:0;transition:.5s}
-.deck{cursor:pointer;text-align:left;transition:.16s;border:1px solid var(--line)}
-.deck:hover{transform:translateY(-3px);border-color:var(--primary);box-shadow:0 14px 34px rgba(63,58,120,.14)}
-.deck .ic{font-size:30px;display:block;margin-bottom:8px}
-.deck h3{font-size:19px;margin-bottom:4px}
-.deck .meta{font-size:12.5px;color:var(--muted)}
-.fc-wrap{max-width:680px;margin:0 auto;text-align:center}
-.flash{perspective:1400px;margin:18px 0}
-.flash-inner{position:relative;width:100%;min-height:300px;transition:transform .55s;transform-style:preserve-3d;cursor:pointer}
-.flash.flipped .flash-inner{transform:rotateY(180deg)}
-.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;padding:32px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:var(--shadow);border:1px solid var(--line)}
-.face.front{background:var(--panel)}
-.face.back{background:var(--soft);transform:rotateY(180deg)}
-.face .q{font-size:25px;font-weight:700;line-height:1.3}
-.face .a{font-size:17px;color:var(--ink)}
-.face .hint{position:absolute;bottom:14px;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
-.face .tagcat{position:absolute;top:14px;left:18px}
-.fc-controls{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:6px}
-.fc-progress{color:var(--muted);font-size:13px;margin-top:14px}
-.q{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:var(--shadow)}
-.q .qnum{color:var(--gold2);font-weight:700;letter-spacing:1px;font-size:12.5px}
-.q h3{font-size:22px;margin:6px 0 18px}
-.opt{display:block;width:100%;text-align:left;font-family:var(--sans);font-size:15px;color:var(--ink);
-  background:#faf9f6;border:1.5px solid var(--line);border-radius:12px;padding:13px 16px;margin-bottom:10px;cursor:pointer;transition:.15s}
-.opt:hover:not(:disabled){border-color:var(--primary);background:#f3f0fa}
-.opt.correct{border-color:var(--good);background:var(--goodbg)}
-.opt.wrong{border-color:var(--bad);background:var(--badbg)}
-.opt:disabled{cursor:default}
-.explain{margin-top:8px;font-size:14px;color:var(--muted);background:#faf9f6;border-radius:10px;padding:12px 14px;border:1px solid var(--line)}
-.quiz-foot{display:flex;justify-content:space-between;align-items:center;margin-top:18px;gap:12px;flex-wrap:wrap}
-.progress{height:7px;border-radius:999px;background:#eceae4;overflow:hidden;margin-bottom:20px}
-.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--primary),var(--gold));width:0;transition:.4s}
-.result{text-align:center;padding:34px 20px}
-.result .score{font-size:56px;font-weight:800;color:var(--primary);line-height:1}
-.badge{display:flex;gap:12px;align-items:center;padding:14px;border-radius:14px;border:1px solid var(--line);background:var(--panel)}
-.badge.locked{opacity:.55}
-.badge .bic{flex:0 0 46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:22px;
-  background:linear-gradient(150deg,var(--primary),var(--primary2));color:#e9c46d}
-.badge.locked .bic{background:#eceae4;color:var(--muted)}
-.badge b{font-size:15px}
-.badge p{margin:0;font-size:12.5px;color:var(--muted)}
-.subnav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-.subnav button{font-family:var(--sans);font-size:13px;font-weight:600;color:var(--muted);background:var(--panel);
-  border:1px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer}
-.subnav button.active{color:var(--primaryink);background:linear-gradient(150deg,var(--primary),var(--primary2));border-color:transparent}
-.wsec{display:none}.wsec.active{display:block}
-.epoch{border-left:3px solid var(--gold);padding-left:18px;margin-bottom:22px}
-.epoch h3{font-size:22px;margin-bottom:2px}.epoch .yrs{color:var(--gold2);font-weight:700;font-size:12.5px;letter-spacing:1px}
-.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
-.tag{font-size:12.5px;background:var(--soft);border:1px solid #ddd4ef;color:var(--primary);padding:4px 10px;border-radius:8px}
-.listen{margin-top:10px;font-size:14px;background:var(--goodbg);border:1px solid #cfe3d7;border-radius:10px;padding:10px 14px}
-.listen b{color:var(--good)}
-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14.5px}
-th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-th{color:var(--gold2);font-size:11.5px;letter-spacing:.5px;text-transform:uppercase}
-tr:hover td{background:#faf9f6}
-.stage-wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;align-items:start}
-@media(max-width:820px){.stage-wrap{grid-template-columns:1fr}}
-.stage{background:#211b33;border:1px solid var(--line);border-radius:18px;padding:14px}
-.stage svg{width:100%;height:auto;display:block}
-.seg{cursor:pointer;transition:.15s}.seg:hover{filter:brightness(1.2)}.seg.sel{stroke:#e9c46d;stroke-width:2.5}
-.info-panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;min-height:200px;box-shadow:var(--shadow)}
-.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.legend span{font-size:12px;display:flex;align-items:center;gap:6px;color:#cfc8e0}
-.dot{width:12px;height:12px;border-radius:3px;display:inline-block}
-.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
-@media(max-width:620px){.vs{grid-template-columns:1fr}}
-.vs .col{border-radius:12px;padding:14px}
-.vs .ok{background:var(--goodbg);border:1px solid #cfe3d7}
-.vs .no{background:var(--badbg);border:1px solid #eccfc7}
-.vs h4{font-size:15px;margin-bottom:8px}.vs .ok h4{color:var(--good)}.vs .no h4{color:var(--bad)}
-.vs ul{margin:0;padding-left:18px;font-size:14px}.vs li{margin-bottom:6px}
-.search{width:100%;font-family:var(--sans);font-size:15px;color:var(--ink);background:var(--panel);
-  border:1.5px solid var(--line);border-radius:12px;padding:13px 16px;margin-bottom:18px}
-.search:focus{outline:none;border-color:var(--primary)}
-.gloss dt{font-size:19px;font-weight:700;color:var(--primary);margin-top:16px}
-.gloss dd{margin:4px 0 0;color:var(--ink);font-size:14.5px}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(40px);opacity:0;
-  background:linear-gradient(150deg,var(--primary),var(--primary2));color:#fff;font-weight:700;
-  padding:12px 22px;border-radius:999px;box-shadow:0 14px 34px rgba(63,58,120,.3);transition:.4s;z-index:99;pointer-events:none}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-footer{max-width:1080px;margin:0 auto;padding:0 18px 50px;color:var(--muted);font-size:12.5px;text-align:center}
-.linkbtn{background:none;border:none;color:var(--primary);cursor:pointer;font-size:13px;font-family:var(--sans);text-decoration:underline;padding:0}
-@media(max-width:600px){.top-inner{padding:10px 14px}.brand b{font-size:16px}.hero{padding:26px 22px}main{padding:20px 14px 80px}.face .q{font-size:22px}nav button{padding:7px 11px;font-size:13px}}
+[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#121310; --card:#1c1e19; --ink:#ece9e2; --muted:#9c988e; --line:#30332c;
+  --brand-soft:#1b271f; --good:#5aa483; --good-soft:#19241d; --bad:#e0826b; --bad-soft:#2c1b15;
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 8px 22px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.wrap{max-width:580px;margin:0 auto;padding:0 16px;
+  padding-top:env(safe-area-inset-top);padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+
+/* header */
+header{position:sticky;top:0;z-index:30;background:var(--bg);
+  padding:calc(12px + env(safe-area-inset-top)) 0 8px;display:flex;align-items:center;gap:8px}
+.brand{font-weight:800;font-size:20px;letter-spacing:-.4px;flex:1}
+.brand b{color:var(--brand)}
+.stat{font-size:13px;font-weight:700;background:var(--card);border:1px solid var(--line);
+  padding:5px 9px;border-radius:999px;box-shadow:var(--shadow);white-space:nowrap}
+.themebtn{font-size:16px;line-height:1;padding:8px 10px;border-radius:10px;
+  color:var(--ink);background:var(--card);border:1px solid var(--line)}
+.themebtn:active{transform:translateY(1px)}
+
+/* tabs */
+.tabs{display:flex;gap:8px;margin:10px 0 14px}
+.tab{flex:1;text-align:center;padding:11px 4px;border-radius:14px;font-weight:700;font-size:13.5px;
+  background:var(--card);border:1px solid var(--line);color:var(--muted);box-shadow:var(--shadow)}
+.tab.on{color:#fff;border-color:transparent}
+.tab:active{transform:translateY(1px)}
+
+/* banner */
+.banner{color:#fff;padding:16px;border-radius:var(--radius);margin-bottom:14px;
+  box-shadow:var(--shadow);display:flex;align-items:center;gap:14px;cursor:pointer}
+.banner .em{font-size:26px}
+.banner b{font-size:16px;display:block}
+.banner small{opacity:.92;font-size:12.5px;font-weight:600}
+.banner .go{margin-left:auto;font-size:22px;opacity:.9}
+.banner:active{transform:translateY(1px)}
+
+/* category cards */
+.sectit{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;
+  color:var(--muted);margin:18px 4px 8px}
+.cat{display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;padding:13px 14px;margin-bottom:9px;box-shadow:var(--shadow);width:100%;text-align:left}
+.cat:active{transform:translateY(1px)}
+.cat .ic{font-size:22px;width:30px;text-align:center;flex:none}
+.cat .tx{flex:1;min-width:0}
+.cat .tx b{font-weight:700;font-size:15px;display:block}
+.cat .tx small{color:var(--muted);font-size:12.5px}
+.cat .ct{font-size:12px;font-weight:700;color:var(--muted);background:var(--bg);
+  border:1px solid var(--line);border-radius:999px;padding:3px 9px;flex:none}
+
+/* quiz */
+.qhead{display:flex;align-items:center;gap:10px;margin:6px 0 12px}
+.back{font-size:15px;font-weight:700;color:var(--muted);padding:6px 8px;border-radius:10px;border:1px solid var(--line);background:var(--card)}
+.pbar{flex:1;height:9px;background:var(--line);border-radius:999px;overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:var(--brand);transition:width .3s ease}
+.qcount{font-size:12.5px;font-weight:700;color:var(--muted);white-space:nowrap}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px;box-shadow:var(--shadow);margin-bottom:14px}
+.kicker{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:800;
+  text-transform:uppercase;letter-spacing:.5px;color:#fff;background:var(--brand);
+  padding:4px 9px;border-radius:999px;margin-bottom:12px}
+.kicker.t-multi{background:var(--accent)} .kicker.t-est{background:var(--gold);color:#1c1b18}
+.kicker.t-match{background:var(--accent)} .kicker.t-order{background:var(--accent)}
+.kicker.t-gap{background:var(--gold);color:#1c1b18} .kicker.t-tf{background:var(--brand)}
+.kicker.t-flip,.kicker.t-recall{background:var(--muted)}
+.qtext{font-size:18px;font-weight:650;line-height:1.4;margin:0 0 4px}
+.qsub{font-size:13px;color:var(--muted);margin:8px 0 2px}
+
+/* options */
+.opts{margin-top:14px;display:flex;flex-direction:column;gap:9px}
+.opt{display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+  background:var(--bg);border:1.5px solid var(--line);border-radius:13px;padding:13px 14px;font-size:15px}
+.opt .k{flex:none;width:25px;height:25px;border-radius:8px;border:1.5px solid var(--line);
+  display:grid;place-items:center;font-weight:800;font-size:13px;color:var(--muted);background:var(--card)}
+.opt:active{transform:translateY(1px)}
+.opt.sel{border-color:var(--brand);background:var(--brand-soft)}
+.opt.sel .k{background:var(--brand);color:#fff;border-color:var(--brand)}
+.opt.correct{border-color:var(--good);background:var(--good-soft)}
+.opt.correct .k{background:var(--good);color:#fff;border-color:var(--good)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong .k{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt[disabled]{cursor:default}
+
+/* true/false */
+.tf{display:flex;gap:10px;margin-top:16px}
+.tf button{flex:1;padding:18px 8px;border-radius:14px;border:1.5px solid var(--line);
+  background:var(--bg);font-size:17px;font-weight:800}
+.tf button .e{font-size:22px;display:block;margin-bottom:3px}
+.tf button.correct{border-color:var(--good);background:var(--good-soft)}
+.tf button.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.tf button.sel{border-color:var(--brand);background:var(--brand-soft)}
+
+/* match */
+.match{display:flex;gap:10px;margin-top:14px}
+.mcol{flex:1;display:flex;flex-direction:column;gap:9px;min-width:0}
+.mitem{border:1.5px solid var(--line);background:var(--bg);border-radius:12px;padding:12px 10px;
+  font-size:13.5px;font-weight:600;text-align:left;position:relative;min-height:46px;display:flex;align-items:center}
+.mitem.active{border-color:var(--brand);background:var(--brand-soft)}
+.mitem.used{opacity:.55}
+.mitem.correct{border-color:var(--good);background:var(--good-soft)}
+.mitem.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.mbadge{position:absolute;top:-7px;right:-7px;width:22px;height:22px;border-radius:50%;
+  background:var(--accent);color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center;box-shadow:var(--shadow)}
+
+/* order */
+.order{margin-top:14px;display:flex;flex-direction:column;gap:9px}
+.oitem{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);background:var(--bg);
+  border-radius:12px;padding:11px 12px;font-size:14.5px;font-weight:600}
+.oitem .num{flex:none;width:24px;height:24px;border-radius:7px;background:var(--card);border:1px solid var(--line);
+  display:grid;place-items:center;font-weight:800;font-size:12px;color:var(--muted)}
+.oitem .lbl{flex:1;min-width:0}
+.oitem .arrows{display:flex;flex-direction:column;gap:2px}
+.oitem .arrows button{font-size:13px;line-height:1;padding:3px 7px;border-radius:7px;border:1px solid var(--line);background:var(--card);font-weight:800}
+.oitem.correct{border-color:var(--good);background:var(--good-soft)}
+.oitem.wrong{border-color:var(--bad);background:var(--bad-soft)}
+
+/* gap input */
+.gapin{margin-top:16px;width:100%;font-size:17px;padding:13px 14px;border-radius:13px;
+  border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-weight:600}
+.gapin:focus{outline:none;border-color:var(--brand);background:var(--brand-soft)}
+
+/* estimate slider */
+.est{margin-top:18px}
+.estval{text-align:center;font-size:30px;font-weight:800;color:var(--brand);margin-bottom:8px}
+.estrange{width:100%;-webkit-appearance:none;appearance:none;height:8px;border-radius:999px;
+  background:var(--line);outline:none}
+.estrange::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;
+  background:var(--brand);border:3px solid var(--card);box-shadow:var(--shadow);cursor:pointer}
+.estrange::-moz-range-thumb{width:30px;height:30px;border-radius:50%;background:var(--brand);border:3px solid var(--card);cursor:pointer}
+.estminmax{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:6px;font-weight:600}
+
+/* flip / recall */
+.flipcard{margin-top:14px;border:1.5px solid var(--line);background:var(--bg);border-radius:14px;
+  padding:20px 16px;min-height:90px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:16px;font-weight:600}
+.hintbox{margin-top:12px;font-size:13.5px;color:var(--muted);font-style:italic}
+.modelbox{margin-top:14px;border-left:3px solid var(--brand);background:var(--brand-soft);
+  border-radius:8px;padding:12px 14px;font-size:14.5px}
+
+/* feedback */
+.fb{margin-top:14px;border-radius:12px;padding:13px 14px;font-size:14.5px;font-weight:500;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--good-soft);color:var(--good);border:1px solid var(--good)}
+.fb.no{background:var(--bad-soft);color:var(--bad);border:1px solid var(--bad)}
+.fb .h{font-weight:800;display:block;margin-bottom:3px}
+.fb .x{color:var(--ink);font-weight:500}
+
+/* footer action */
+.foot{position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 70%,transparent);
+  padding:12px 0 calc(14px + env(safe-area-inset-bottom));display:flex;gap:10px}
+.btn{flex:1;padding:15px;border-radius:14px;font-size:16px;font-weight:800;
+  background:var(--brand);color:#fff;box-shadow:var(--shadow)}
+.btn:active{transform:translateY(1px)}
+.btn[disabled]{opacity:.4;cursor:default}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.btn.good{background:var(--good)} .btn.bad{background:var(--bad)}
+
+/* result */
+.result{text-align:center;padding:30px 16px}
+.result .big{font-size:54px;font-weight:800;margin:8px 0}
+.result .ring{width:130px;height:130px;margin:6px auto 14px;border-radius:50%;
+  display:grid;place-items:center;font-size:34px;font-weight:800;color:#fff}
+.result h2{font-size:22px;margin:4px 0 2px}
+.result p{color:var(--muted);margin:4px 0}
+.pill{display:inline-block;background:var(--card);border:1px solid var(--line);border-radius:999px;
+  padding:7px 14px;font-weight:700;font-size:14px;margin:5px 4px;box-shadow:var(--shadow)}
+.hidden{display:none!important}
+/* aroma wheel */
+.wheelView{width:100%;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow);padding:6px}
+.wheelView svg{display:block;margin:0 auto;width:100%;max-width:460px;height:auto;touch-action:manipulation}
+.seg{cursor:pointer;transition:opacity .15s} .seg.dim{opacity:.22}
+.wlabel{font-weight:800;fill:#fff;pointer-events:none}
+.wctr{font-weight:800;fill:var(--ink);pointer-events:none;text-anchor:middle}
+.wdetail{margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;box-shadow:var(--shadow)}
+.wdetail h3{margin:0 0 4px;font-size:17px} .wdetail .cap{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--brand)}
+.wdetail p{margin:6px 0 10px;color:var(--muted);font-size:13.5px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:12.5px;font-weight:600;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:7px 12px;cursor:pointer}
+.chip:active{transform:translateY(1px)} .chip.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+.whint{font-size:12px;color:var(--muted);text-align:center;margin:10px 0 2px}
+.wheelFrame{width:100%;height:80vh;min-height:500px;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:var(--shadow);overflow:hidden;margin-bottom:8px}
+.wheelFrame iframe{width:100%;height:100%;border:0;display:block}
+.dots{display:inline-flex;gap:3px;vertical-align:middle;margin-left:2px}
+.dots i{width:6px;height:6px;border-radius:50%;background:var(--line);display:inline-block}
+.dots i.on{background:var(--gold)}
 </style>
 </head>
 <body>
-<header class="top">
-  <div class="top-inner">
-    <div class="brand">
-      <div class="logo">♬</div>
-      <div><b>Klassik &amp; Oper lernen</b><span>Lernkarten · Quiz · Wissen</span></div>
-    </div>
-    <nav id="nav"></nav>
+<div class="wrap">
+  <!-- HEADER -->
+  <header>
+    <div class="brand" id="brandTitle"></div>
+    <div class="stat" id="streakStat">🔥 0</div>
+    <div class="stat" id="xpStat">⭐ 0</div>
+    <button class="themebtn" id="themeBtn" aria-label="Hell/Dunkel">🌙</button>
+  </header>
+
+  <!-- HOME -->
+  <div id="homeView">
+    <div class="tabs" id="tabs"></div>
+    <div id="bannerSlot"></div>
+    <div id="catList"></div>
   </div>
-</header>
-
-<main>
-  <!-- START / DASHBOARD -->
-  <section class="view active" id="start">
-    <div class="hero">
-      <span class="pill">Deine Lern-App</span>
-      <h1 id="greet">Willkommen zurück</h1>
-      <p>Lerne klassische Musik mit Karten und Quiz – Schritt für Schritt erkennst du Epochen, Instrumente, Orchester und gute Interpretationen heraus. Der Fokus liegt auf der Musik.</p>
-      <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn" onclick="go('lernkarten')">▶ Weiterlernen</button>
-        <button class="btn ghost" onclick="go('quiz')">Quiz starten</button>
-      </div>
-    </div>
-
-    <div class="stats">
-      <div class="stat"><div class="num" id="stStreak">0</div><div class="lbl">Tage-Streak 🔥</div></div>
-      <div class="stat"><div class="num" id="stMastered">0</div><div class="lbl">Karten gemeistert</div></div>
-      <div class="stat"><div class="num" id="stPct">0%</div><div class="lbl">Gesamtfortschritt</div></div>
-      <div class="stat"><div class="num" id="stBadges">0</div><div class="lbl">Abzeichen</div></div>
-    </div>
-
-    <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-        <h3 style="margin:0">Lernfortschritt</h3>
-        <span class="muted" id="overallText">0 / 0 Karten</span>
-      </div>
-      <div class="bar"><i id="overallBar"></i></div>
-      <div id="deckProgress" style="margin-top:18px"></div>
-    </div>
-
-    <hr class="sep">
-    <h3 style="font-family:var(--serif);font-size:24px">Heute empfohlen</h3>
-    <div class="grid g3" id="recoTiles"></div>
-  </section>
-
-  <!-- LERNKARTEN -->
-  <section class="view" id="lernkarten">
-    <div id="deckPicker">
-      <div style="margin-bottom:22px">
-        <span class="pill">Lernkarten</span>
-        <h2 style="font-size:clamp(26px,4vw,36px);margin:6px 0 4px">Wähle einen Stapel</h2>
-        <p class="muted" style="margin:0">Karte antippen zum Umdrehen. Markiere „Gewusst" oder „Nochmal" – dein Fortschritt wird gespeichert.</p>
-      </div>
-      <div class="grid g2" id="deckTiles"></div>
-      <hr class="sep">
-      <div class="card" id="reviewTile" style="display:none">
-        <span class="ic" style="font-size:28px">🔁</span>
-        <h3>Wiederholung</h3>
-        <p class="muted" id="reviewMeta"></p>
-        <button class="btn" onclick="startDeck('review')">Wiederholen</button>
-      </div>
-    </div>
-
-    <div id="deckRunner" style="display:none">
-      <button class="linkbtn" onclick="go('lernkarten')">← Zurück zu den Stapeln</button>
-      <div class="fc-wrap">
-        <h2 id="deckTitle" style="font-size:28px;margin:6px 0 0"></h2>
-        <div class="flash" id="flash" onclick="flipCard()">
-          <div class="flash-inner">
-            <div class="face front"><span class="pill tagcat" id="fcCat"></span><div class="q" id="fcFront"></div><span class="hint">Tippen zum Umdrehen</span></div>
-            <div class="face back"><div class="a" id="fcBack"></div><span class="hint">Wie lief's?</span></div>
-          </div>
-        </div>
-        <div class="fc-controls">
-          <button class="btn again" onclick="rateCard(false)">↻ Nochmal</button>
-          <button class="btn good" onclick="rateCard(true)">✓ Gewusst</button>
-        </div>
-        <div class="fc-progress" id="fcProgress"></div>
-      </div>
-    </div>
-  </section>
 
   <!-- QUIZ -->
-  <section class="view" id="quiz">
-    <div id="quizPicker">
-      <div style="margin-bottom:22px">
-        <span class="pill">Quiz</span>
-        <h2 style="font-size:clamp(26px,4vw,36px);margin:6px 0 4px">Teste dein Wissen</h2>
-        <p class="muted" style="margin:0">Wähle ein Thema oder alles gemischt. 10 Fragen, sofortige Erklärung, dein Bestwert wird gespeichert.</p>
-      </div>
-      <div class="grid g3" id="quizTiles"></div>
+  <div id="quizView" class="hidden">
+    <div class="qhead">
+      <button class="back" id="quizBack">‹ Ende</button>
+      <div class="pbar"><i id="pbarFill"></i></div>
+      <div class="qcount" id="qcount"></div>
     </div>
-    <div id="quizRunner" style="display:none">
-      <button class="linkbtn" onclick="go('quiz')">← Zurück zur Themenwahl</button>
-      <div style="max-width:760px;margin:8px auto 0">
-        <div class="progress"><i id="qbar"></i></div>
-        <div id="quizArea"></div>
-      </div>
-    </div>
-  </section>
+    <div id="cardSlot"></div>
+    <div class="foot" id="footSlot"></div>
+  </div>
 
-  <!-- WISSEN -->
-  <section class="view" id="wissen">
-    <div style="margin-bottom:18px">
-      <span class="pill">Wissen &amp; Nachschlagen</span>
-      <h2 style="font-size:clamp(26px,4vw,36px);margin:6px 0 4px">Das Lernmaterial</h2>
-      <p class="muted" style="margin:0">Hier steckt der Stoff hinter den Karten. Lies dich ein – die Karten und das Quiz festigen es.</p>
+  <!-- RESULT -->
+  <div id="resultView" class="hidden">
+    <div class="result">
+      <div class="ring" id="resRing"></div>
+      <h2 id="resTitle"></h2>
+      <p id="resSub"></p>
+      <div id="resPills"></div>
     </div>
-    <div class="subnav" id="wissenNav"></div>
-
-    <div class="wsec active" id="w-epochen">
-      <div class="epoch"><span class="yrs">ca. 1600–1750</span><h3>Barock</h3>
-        <p class="muted">Verzierte, kontrapunktische Musik mit gleichmäßigem Puls und Generalbass. Klein besetzte Ensembles, Cembalo statt Klavier – ein kunstvoller Teppich aus gleichberechtigten Stimmen.</p>
-        <div class="tags"><span class="tag">Bach</span><span class="tag">Händel</span><span class="tag">Vivaldi</span><span class="tag">Telemann</span></div>
-        <div class="listen"><b>Klang-Erkennung:</b> Mehrere ineinander verwobene Stimmen (Polyphonie), durchlaufender Bass, Terrassendynamik (laut/leise als Stufen), oft Cembalo hörbar.</div></div>
-      <div class="epoch"><span class="yrs">ca. 1750–1820</span><h3>Wiener Klassik</h3>
-        <p class="muted">Klarheit, Balance, Form. Melodie mit Begleitung, „sprechende" Phrasen. Hier entstehen Sinfonie und Streichquartett in ihrer bekannten Gestalt.</p>
-        <div class="tags"><span class="tag">Haydn</span><span class="tag">Mozart</span><span class="tag">Beethoven (früh)</span></div>
-        <div class="listen"><b>Klang-Erkennung:</b> Ebenmäßige Phrasen, Frage-Antwort-Motive, durchsichtiger Klang, klare Sonatensatzform (Thema – Durchführung – Reprise).</div></div>
-      <div class="epoch"><span class="yrs">ca. 1820–1900</span><h3>Romantik</h3>
-        <p class="muted">Gefühl, Farbe, Erzählung. Größere Orchester, kühne Harmonien, weite Steigerungen.</p>
-        <div class="tags"><span class="tag">Schubert</span><span class="tag">Brahms</span><span class="tag">Tschaikowsky</span><span class="tag">Wagner</span><span class="tag">Verdi</span></div>
-        <div class="listen"><b>Klang-Erkennung:</b> Große dynamische Bögen, Rubato, reiche Harmonik, Leitmotive, üppige Streicher- &amp; Bläserfarben.</div></div>
-      <div class="epoch"><span class="yrs">ca. 1900–heute</span><h3>Moderne</h3>
-        <p class="muted">Aufbruch: Impressionismus, Atonalität, Neoklassik, Minimal Music. Regeln werden neu erfunden.</p>
-        <div class="tags"><span class="tag">Debussy</span><span class="tag">Mahler</span><span class="tag">Strawinsky</span><span class="tag">Schostakowitsch</span></div>
-        <div class="listen"><b>Klang-Erkennung:</b> Ungewohnte Klangfarben/Rhythmen, schwebende oder fehlende Tonart, scharfe Kontraste.</div></div>
+    <div class="foot">
+      <button class="btn ghost" id="resHome">Startseite</button>
+      <button class="btn" id="resAgain">Nochmal</button>
     </div>
+  </div>
+</div>
 
-    <div class="wsec" id="w-orchester">
-      <p class="muted" style="margin-top:0">Ein Sinfonieorchester ist nach Klangfamilien geordnet – Halbrund um den Dirigenten. Klick auf eine Gruppe.</p>
-      <div class="stage-wrap">
-        <div class="stage">
-          <svg viewBox="0 0 600 440" role="img" aria-label="Orchester-Sitzplan">
-            <defs><radialGradient id="floor" cx="50%" cy="8%" r="90%"><stop offset="0%" stop-color="#2a2140"/><stop offset="100%" stop-color="#15101f"/></radialGradient></defs>
-            <rect x="20" y="20" width="560" height="400" rx="24" fill="url(#floor)" stroke="rgba(231,196,107,.18)"/>
-            <path d="M70 360 A 230 230 0 0 1 530 360" fill="none" stroke="rgba(255,255,255,.05)"/>
-            <path d="M120 360 A 175 175 0 0 1 480 360" fill="none" stroke="rgba(255,255,255,.05)"/>
-            <path d="M170 360 A 120 120 0 0 1 430 360" fill="none" stroke="rgba(255,255,255,.05)"/>
-            <g class="seg" data-k="v1"><path d="M150 360 A 120 120 0 0 1 280 245 L 296 360 Z" fill="#9b7bd6"/><text x="205" y="335" font-size="13" fill="#1a1326" font-weight="700">1. Violinen</text></g>
-            <g class="seg" data-k="v2"><path d="M320 245 A 120 120 0 0 1 450 360 L 304 360 Z" fill="#8a68c9"/><text x="345" y="335" font-size="13" fill="#1a1326" font-weight="700">2. Violinen</text></g>
-            <g class="seg" data-k="va"><path d="M180 250 A 175 175 0 0 1 300 200 L 286 240 A 120 120 0 0 0 196 296 Z" fill="#7d57c2"/><text x="212" y="242" font-size="11" fill="#fff" font-weight="700">Bratschen</text></g>
-            <g class="seg" data-k="vc"><path d="M300 200 A 175 175 0 0 1 420 250 L 404 296 A 120 120 0 0 0 314 240 Z" fill="#6f48b3"/><text x="345" y="242" font-size="11" fill="#fff" font-weight="700">Celli</text></g>
-            <g class="seg" data-k="cb"><rect x="446" y="246" width="64" height="36" rx="9" fill="#5c3a96"/><text x="452" y="269" font-size="10" fill="#fff" font-weight="700">Kontrab.</text></g>
-            <g class="seg" data-k="ww"><rect x="220" y="150" width="160" height="46" rx="12" fill="#e7c46b"/><text x="244" y="178" font-size="13" fill="#1a1326" font-weight="700">Holzbläser</text></g>
-            <g class="seg" data-k="br"><rect x="200" y="92" width="200" height="44" rx="12" fill="#c98a3a"/><text x="262" y="119" font-size="13" fill="#1a1326" font-weight="700">Blechbläser</text></g>
-            <g class="seg" data-k="pe"><rect x="412" y="92" width="120" height="44" rx="12" fill="#a23a5f"/><text x="430" y="119" font-size="12" fill="#fff" font-weight="700">Schlagwerk</text></g>
-            <g class="seg" data-k="hp"><rect x="68" y="150" width="90" height="44" rx="12" fill="#6fcf97"/><text x="92" y="178" font-size="12" fill="#1a1326" font-weight="700">Harfe</text></g>
-            <g class="seg" data-k="co"><circle cx="300" cy="392" r="22" fill="#e7c46b" stroke="#fff" stroke-width="2"/><text x="289" y="397" font-size="11" fill="#1a1326" font-weight="700">Dir.</text></g>
-          </svg>
-          <div class="legend">
-            <span><i class="dot" style="background:#7d57c2"></i>Streicher</span>
-            <span><i class="dot" style="background:#e7c46b"></i>Holz</span>
-            <span><i class="dot" style="background:#c98a3a"></i>Blech</span>
-            <span><i class="dot" style="background:#a23a5f"></i>Schlagwerk</span>
-            <span><i class="dot" style="background:#6fcf97"></i>Harfe</span>
-          </div>
-        </div>
-        <div class="info-panel" id="orchInfo">
-          <span class="pill">Sitzplan</span>
-          <h3 style="margin-top:12px">Klick auf eine Gruppe</h3>
-          <p class="muted">Streicher vorn (leise, zahlreich), dahinter Holz, dann Blech &amp; Schlagwerk (laut) – so bleibt die Balance gewahrt.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="wsec" id="w-interpretation">
-      <p class="muted" style="margin-top:0">Zwei Orchester, dieselben Noten – völlig anderer Eindruck. „Gut" heißt nicht „fehlerfrei", sondern <em>überzeugend</em>. Daran misst man eine Interpretation:</p>
-      <div class="card">
-        <table>
-          <tr><th>Kriterium</th><th>Worauf du hörst</th></tr>
-          <tr><td>Tempo &amp; Puls</td><td>Trägt der Puls? Stabil, aber nicht mechanisch – mit feinem Rubato.</td></tr>
-          <tr><td>Dynamik &amp; Spannungsbogen</td><td>Echte Pianissimi, Fortissimo mit Reserve; Spannung über lange Bögen statt „immer mittellaut".</td></tr>
-          <tr><td>Intonation</td><td>Reine Tonhöhe; keine schwimmenden Bläser oder kratzigen Höhen.</td></tr>
-          <tr><td>Ensemble</td><td>Spielt das Orchester wie ein Instrument? Einsätze und Läufe wie aus einem Guss.</td></tr>
-          <tr><td>Phrasierung</td><td>Melodien werden „ausgesprochen" – mit Betonung, Bogen, Atempunkt.</td></tr>
-          <tr><td>Klangbalance</td><td>Hauptstimme trägt, Begleitung tritt zurück; Farben mischen sich zum Ganzen.</td></tr>
-          <tr><td>Aussage</td><td>Hat die Deutung eine Idee, erzählt sie etwas Schlüssiges über den ganzen Satz?</td></tr>
-        </table>
-      </div>
-      <div class="vs">
-        <div class="col ok"><h4>✓ Überzeugend</h4><ul><li>Stille wird ausgehalten, echtes Pianissimo.</li><li>Spannung wächst und entlädt sich gezielt.</li><li>Hauptstimme trägt, reine Intonation.</li><li>Tempo „atmet", bleibt kohärent.</li><li>Man hört Musik, nicht Technik.</li></ul></div>
-        <div class="col no"><h4>✗ Schwächer</h4><ul><li>Alles „mittellaut", keine Kontraste.</li><li>Tempo zieht/schleppt unmotiviert.</li><li>Klangbrei, Linien verschwinden.</li><li>Unsaubere Einsätze, Intonationstrübung.</li><li>Korrekt, aber gleichgültig.</li></ul></div>
-      </div>
-      <div class="listen" style="margin-top:16px"><b>Profi-Trick:</b> Höre dieselbe Stelle (z. B. die ersten 2 Minuten von Beethovens 5.) in zwei Aufnahmen direkt hintereinander. So hörst du, was eine Entscheidung ist – und welche dich mehr packt.</div>
-    </div>
-
-    <div class="wsec" id="w-oper">
-      <p class="muted" style="margin-top:0">Oper ist gesungene Musik – wir hören sie hier vor allem <em>musikalisch</em>: die Stimme als Instrument und das Orchester als Mit-Erzähler. Das Grundgerüst dazu in Kürze.</p>
-      <div class="grid g2">
-        <div class="card"><h3>🎻 Die Musik (das Wesentliche)</h3>
-          <p class="muted"><b style="color:var(--gold)">Die Stimme als Instrument:</b> Sänger werden nach Klangfarbe &amp; Lage eingeteilt (Stimmfächer). Wie bei Instrumenten zählt Intonation, Phrasierung, Dynamik und Timbre.</p>
-          <table>
-            <tr><th>Stimme</th><th>Lage / Klang</th></tr>
-            <tr><td>Sopran</td><td>hoch, hell – oft strahlende Spitzentöne</td></tr>
-            <tr><td>Mezzo / Alt</td><td>mittel/tief, warm &amp; dunkel</td></tr>
-            <tr><td>Tenor</td><td>hoch (Mann), klangvoll, „heldisch"</td></tr>
-            <tr><td>Bariton / Bass</td><td>mittel/tief, voll &amp; tragend</td></tr>
-          </table>
-          <p class="muted" style="margin-top:12px"><b style="color:var(--gold)">Das Orchester:</b> trägt Stimmung, Spannung und Farbe – es kommentiert, treibt und malt. Bei Wagner verknüpfen <em>Leitmotive</em> Klänge mit Figuren/Ideen. Achte auf: Koloratur (schnelle Verzierungen), Belcanto (schöner Liniengesang), Crescendi und das Zusammenspiel Stimme ↔ Orchester.</p>
-        </div>
-        <div class="card"><h3>🧱 Grundwissen (zur Orientierung)</h3>
-          <table>
-            <tr><th>Begriff</th><th>Funktion</th></tr>
-            <tr><td>Ouvertüre</td><td>Instrumentale Eröffnung, stimmt auf Themen ein.</td></tr>
-            <tr><td>Arie</td><td>Solo-Nummer; Figur hält inne, die Musik blüht auf.</td></tr>
-            <tr><td>Rezitativ</td><td>Sprechgesang, trägt die Handlung.</td></tr>
-            <tr><td>Ensemble</td><td>Mehrere Stimmen zugleich – musikalisch oft der Höhepunkt.</td></tr>
-            <tr><td>Libretto</td><td>Der Text der Oper.</td></tr>
-          </table>
-          <div class="listen" style="margin-top:12px"><b>Hör-Einstieg:</b> „Nessun dorma" (Puccini), Königin-der-Nacht-Arie (Mozart), Vorspiel zu „Tristan und Isolde" (Wagner) – konzentriere dich auf Stimme und Orchester, nicht auf die Handlung.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="wsec" id="w-welt">
-      <p class="muted" style="margin-top:0">„Das beste" Orchester gibt es nicht objektiv – aber einen festen Kreis der Weltspitze. Angaben Stand 2026.</p>
-      <div class="grid g2">
-        <div class="card"><h3>🌍 Spitzenorchester</h3>
-          <table>
-            <tr><th>Orchester</th><th>Sitz</th><th>Chefdirigent</th></tr>
-            <tr><td>Royal Concertgebouw</td><td>Amsterdam</td><td>Klaus Mäkelä (ab 2027)</td></tr>
-            <tr><td>Berliner Philharmoniker</td><td>Berlin</td><td>Kirill Petrenko</td></tr>
-            <tr><td>Wiener Philharmoniker</td><td>Wien</td><td>kein Chef – Gastdirigenten</td></tr>
-            <tr><td>London Symphony</td><td>London</td><td>Antonio Pappano</td></tr>
-            <tr><td>Sym.-Orch. des BR</td><td>München</td><td>Simon Rattle</td></tr>
-            <tr><td>Chicago Symphony</td><td>Chicago</td><td>Klaus Mäkelä (ab 2027/28)</td></tr>
-            <tr><td>Gewandhausorchester</td><td>Leipzig</td><td>Andris Nelsons</td></tr>
-          </table>
-          <p class="muted" style="font-size:12.5px;font-style:italic">Die Wiener Philharmoniker verwalten sich selbst; Neujahrskonzert 2026 leitete erstmals Yannick Nézet-Séguin.</p>
-        </div>
-        <div class="card"><h3>🎼 Prägende Dirigenten</h3>
-          <p class="muted"><b style="color:var(--gold)">Legenden:</b> Herbert von Karajan (samtiger „Karajan-Sound", Berlin), Leonard Bernstein (glühend, Referenz-Mahler), Carlos Kleiber (selten, aber Kult-Beethoven).</p>
-          <p class="muted"><b style="color:var(--gold)">Heute:</b> Kirill Petrenko (Berlin, detailgenau), Gustavo Dudamel (New York ab 2026, charismatisch), Simon Rattle (München), Andris Nelsons (Leipzig &amp; Boston).</p>
-          <p class="muted"><b style="color:var(--gold)">Zukunft:</b> Klaus Mäkelä – der junge Finne übernimmt ab 2027 Concertgebouw <em>und</em> Chicago.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="wsec" id="w-glossar">
-      <input class="search" id="glossSearch" placeholder="Begriff suchen … (z. B. Rubato, Koloratur, Fuge)">
-      <dl class="gloss" id="glossList"></dl>
-    </div>
-  </section>
-
-  <!-- FORTSCHRITT -->
-  <section class="view" id="fortschritt">
-    <div style="margin-bottom:18px">
-      <span class="pill">Fortschritt</span>
-      <h2 style="font-size:clamp(26px,4vw,36px);margin:6px 0 4px">Deine Erfolge</h2>
-      <p class="muted" style="margin:0">Abzeichen, Statistik und – falls du neu starten willst – ein Reset.</p>
-    </div>
-    <div class="stats">
-      <div class="stat"><div class="num" id="fStreak">0</div><div class="lbl">Tage-Streak 🔥</div></div>
-      <div class="stat"><div class="num" id="fMastered">0</div><div class="lbl">Karten gemeistert</div></div>
-      <div class="stat"><div class="num" id="fQuiz">–</div><div class="lbl">Quiz-Bestwert</div></div>
-      <div class="stat"><div class="num" id="fBadges">0</div><div class="lbl">Abzeichen</div></div>
-    </div>
-    <h3 style="font-family:var(--serif);font-size:24px">Abzeichen</h3>
-    <div class="grid g2" id="badgeList"></div>
-    <hr class="sep">
-    <button class="btn ghost sm" onclick="resetProgress()">Fortschritt zurücksetzen</button>
-  </section>
-</main>
-
-<div class="toast" id="toast"></div>
-<footer><p>Klassik &amp; Oper lernen · Lernkarten · Quiz · Wissen · Fortschritt wird lokal in deinem Browser gespeichert. Angaben Stand 2026.</p></footer>
-
+<script id="cfg" type="application/json">{"brand": "Klas<b>sik</b>", "brandColor": "#3f3a78", "storeKey": "klassik_lern_v1", "tracks": [{"id": "musik", "label": "Musik", "emoji": "🎻", "color": "#3f3a78"}, {"id": "oper", "label": "Oper", "emoji": "🎭", "color": "#7a1f3d"}, {"id": "welt", "label": "Welt", "emoji": "🌍", "color": "#5a2f6e"}], "catIcons": {"Epochen & Stil": "🏛️", "Das Orchester": "🎻", "Interpretation & Hören": "⭐", "Oper verstehen": "🎭", "Stimmen & Gesang": "🎙️", "Beste Orchester & Dirigenten": "🌍", "Fachbegriffe": "📖"}}</script>
+<script id="qdata" type="application/json">[{"track": "musik", "cat": "Epochen & Stil", "d": 1, "ty": "mc", "q": "Welche Epoche kommt direkt vor der Romantik?", "opts": ["Barock", "Wiener Klassik", "Moderne", "Renaissance"], "c": 1, "fb": "Reihenfolge: Barock → Klassik → Romantik → Moderne."}, {"track": "musik", "cat": "Epochen & Stil", "d": 2, "ty": "tf", "q": "Der Generalbass ist ein typisches Merkmal der Barockmusik.", "a": true, "fb": "Ja – der durchlaufende Bass mit ausgefüllten Akkorden prägt den Barock."}, {"track": "musik", "cat": "Epochen & Stil", "d": 1, "ty": "gap", "q": "Die drei großen Komponisten der Wiener Klassik sind Haydn, Mozart und ___.", "a": ["Beethoven"], "fb": "Beethoven gehört (früh/mittel) zur Wiener Klassik."}, {"track": "musik", "cat": "Epochen & Stil", "d": 2, "ty": "odd", "q": "Welcher Komponist gehört NICHT zum Barock?", "opts": ["Bach", "Händel", "Vivaldi", "Debussy"], "c": 3, "fb": "Debussy ist ein Komponist der Moderne (Impressionismus)."}, {"track": "musik", "cat": "Epochen & Stil", "d": 2, "ty": "order", "q": "Sortiere die Komponisten chronologisch (früh → spät).", "items": ["Bach", "Mozart", "Brahms", "Strawinsky"], "fb": "Barock (Bach) → Klassik (Mozart) → Romantik (Brahms) → Moderne (Strawinsky)."}, {"track": "musik", "cat": "Epochen & Stil", "d": 2, "ty": "flip", "front": "Was bedeutet „Terrassendynamik\"?", "reveal": "Lautstärkewechsel in Stufen (laut/leise) statt fließend – typisch für den Barock."}, {"track": "musik", "cat": "Epochen & Stil", "d": 2, "ty": "mc", "q": "Welche Epoche ist von großen dynamischen Bögen, Rubato und üppigen Orchesterfarben geprägt?", "opts": ["Barock", "Wiener Klassik", "Romantik", "Renaissance"], "c": 2, "fb": "Die Romantik stellt Gefühl, Farbe und Erzählung in den Vordergrund."}, {"track": "musik", "cat": "Epochen & Stil", "d": 3, "ty": "match", "q": "Ordne Komponist und Epoche zu.", "pairs": [["Bach", "Barock"], ["Mozart", "Wiener Klassik"], ["Wagner", "Romantik"], ["Strawinsky", "Moderne"]], "fb": "Eine grobe Landkarte der Musikgeschichte."}, {"track": "musik", "cat": "Das Orchester", "d": 1, "ty": "mc", "q": "Welche Instrumentengruppe sitzt im Sinfonieorchester ganz vorn?", "opts": ["Blechbläser", "Schlagwerk", "Streicher", "Holzbläser"], "c": 2, "fb": "Die leisen, zahlreichen Streicher sitzen vorn im Halbrund."}, {"track": "musik", "cat": "Das Orchester", "d": 2, "ty": "multi", "q": "Welche Instrumente gehören zu den Holzbläsern?", "opts": ["Flöte", "Oboe", "Trompete", "Klarinette", "Fagott"], "c": [0, 1, 3, 4], "fb": "Trompete ist ein Blechblasinstrument."}, {"track": "musik", "cat": "Das Orchester", "d": 1, "ty": "gap", "q": "Die erste Geige, die das Orchester einstimmt, heißt ___.", "a": ["Konzertmeister", "Konzertmeisterin"], "fb": "Der Konzertmeister ist Bindeglied zum Dirigenten."}, {"track": "musik", "cat": "Das Orchester", "d": 2, "ty": "tf", "q": "Blechbläser und Schlagwerk sitzen hinten, damit die Balance gewahrt bleibt.", "a": true, "fb": "So tragen die lauten Instrumente über die Streicher hinweg."}, {"track": "musik", "cat": "Das Orchester", "d": 1, "ty": "odd", "q": "Welches Instrument gehört NICHT zu den Streichern?", "opts": ["Bratsche", "Violoncello", "Oboe", "Kontrabass"], "c": 2, "fb": "Die Oboe ist ein Holzblasinstrument."}, {"track": "musik", "cat": "Das Orchester", "d": 1, "ty": "flip", "front": "Was ist die Aufgabe des Dirigenten?", "reveal": "Er gestaltet Tempo, Balance, Dynamik und die große Linie und gibt Einsätze – er formt die Interpretation."}, {"track": "musik", "cat": "Das Orchester", "d": 2, "ty": "order", "q": "Sortiere die Streichinstrumente von hoch nach tief.", "items": ["Violine", "Bratsche", "Violoncello", "Kontrabass"], "fb": "Von der hellen Violine bis zum tiefen Kontrabass."}, {"track": "musik", "cat": "Das Orchester", "d": 2, "ty": "mc", "q": "Welche Instrumente bilden die Blechbläser?", "opts": ["Flöte, Oboe, Klarinette", "Horn, Trompete, Posaune, Tuba", "Geige, Bratsche, Cello", "Pauke, Becken"], "c": 1, "fb": "Das Blech sorgt für Glanz und feierliche Höhepunkte."}, {"track": "musik", "cat": "Interpretation & Hören", "d": 1, "ty": "gap", "q": "Das feine, ausdrucksvolle Dehnen und Drängen des Tempos heißt ___.", "a": ["Rubato"], "fb": "Rubato lässt die Musik „atmen\"."}, {"track": "musik", "cat": "Interpretation & Hören", "d": 1, "ty": "mc", "q": "Was meint „Intonation\"?", "opts": ["Lautstärke", "Sauberkeit der Tonhöhe", "Sitzordnung", "Geschwindigkeit"], "c": 1, "fb": "Intonation = wie sauber die Töne zueinander gestimmt sind."}, {"track": "musik", "cat": "Interpretation & Hören", "d": 2, "ty": "tf", "q": "„Immer gleich mittellaut\" ist ein Zeichen einer überzeugenden Interpretation.", "a": false, "fb": "Gute Deutungen leben von Kontrast und einem Spannungsbogen."}, {"track": "musik", "cat": "Interpretation & Hören", "d": 2, "ty": "flip", "front": "Was bedeutet „Phrasierung\"?", "reveal": "Das Gliedern und Formen von Melodien in sinnvolle „Sätze\" – mit Betonung, Bogen und Atempunkt."}, {"track": "musik", "cat": "Interpretation & Hören", "d": 2, "ty": "mc", "q": "Was beschreibt „Ensemble\" im Sinne von Qualität?", "opts": ["Die Sitzordnung", "Die Präzision des Zusammenspiels", "Die Lautstärke", "Das Programmheft"], "c": 1, "fb": "Einsätze, Läufe und Pausen wie aus einem Guss."}, {"track": "musik", "cat": "Interpretation & Hören", "d": 1, "ty": "odd", "q": "Was ist KEIN Qualitätskriterium einer Interpretation?", "opts": ["Intonation", "Klangbalance", "Lautstärke des Applauses", "Phrasierung"], "c": 2, "fb": "Der Applaus sagt nichts über die musikalische Qualität."}, {"track": "oper", "cat": "Oper verstehen", "d": 1, "ty": "mc", "q": "Was ist eine Arie?", "opts": ["Ein instrumentales Vorspiel", "Eine Solo-Gesangsnummer, in der die Musik aufblüht", "Sprechgesang", "Der Schlusschor"], "c": 1, "fb": "Die Arie ist der lyrische Höhepunkt einer Figur."}, {"track": "oper", "cat": "Oper verstehen", "d": 1, "ty": "mc", "q": "Wie heißt die instrumentale Eröffnung einer Oper?", "opts": ["Arie", "Rezitativ", "Ouvertüre", "Finale"], "c": 2, "fb": "Die Ouvertüre stimmt auf Stimmung und Themen ein."}, {"track": "oper", "cat": "Oper verstehen", "d": 1, "ty": "gap", "q": "Der Text einer Oper heißt ___.", "a": ["Libretto"], "fb": "Das Libretto ist das Textbuch der Oper."}, {"track": "oper", "cat": "Oper verstehen", "d": 2, "ty": "tf", "q": "Das Rezitativ ist sprechähnlicher Gesang, der die Handlung vorantreibt.", "a": true, "fb": "Im Gegensatz zur Arie, die innehält."}, {"track": "oper", "cat": "Oper verstehen", "d": 2, "ty": "flip", "front": "Was ist ein „Ensemble\" in der Oper?", "reveal": "Eine Nummer, in der mehrere Stimmen zugleich singen – oft ein musikalischer Höhepunkt."}, {"track": "oper", "cat": "Oper verstehen", "d": 2, "ty": "mc", "q": "Die Leitmotiv-Technik (wiederkehrende Motive für Personen/Ideen) wurde berühmt durch:", "opts": ["Verdi", "Mozart", "Wagner", "Puccini"], "c": 2, "fb": "Richard Wagner prägte die Leitmotiv-Technik."}, {"track": "oper", "cat": "Oper verstehen", "d": 2, "ty": "match", "q": "Ordne Element und Funktion zu.", "pairs": [["Ouvertüre", "Instrumentale Eröffnung"], ["Arie", "Solo-Gefühlsnummer"], ["Rezitativ", "Treibt die Handlung"], ["Finale", "Großer Akt-Abschluss"]], "fb": "Der Bauplan einer Oper."}, {"track": "oper", "cat": "Stimmen & Gesang", "d": 2, "ty": "order", "q": "Sortiere die Stimmlagen von hoch nach tief.", "items": ["Sopran", "Alt", "Tenor", "Bass"], "fb": "Sopran (hoch, Frau) bis Bass (tief, Mann)."}, {"track": "oper", "cat": "Stimmen & Gesang", "d": 1, "ty": "mc", "q": "Welches Stimmfach ist typischerweise der Opernheld?", "opts": ["Bass", "Tenor", "Alt", "Bariton"], "c": 1, "fb": "Der Held ist oft Tenor; Väter/Gegenspieler eher Bariton/Bass."}, {"track": "oper", "cat": "Stimmen & Gesang", "d": 2, "ty": "gap", "q": "Schnelle, virtuose Verzierungen der Singstimme nennt man ___.", "a": ["Koloratur", "Koloraturen"], "fb": "Glanzvoll v. a. im hohen Sopran."}, {"track": "oper", "cat": "Stimmen & Gesang", "d": 2, "ty": "tf", "q": "„Belcanto\" bezeichnet einen Stil des schönen, fließenden Liniengesangs.", "a": true, "fb": "Wörtlich „schöner Gesang\" (z. B. Bellini, Donizetti)."}, {"track": "oper", "cat": "Stimmen & Gesang", "d": 1, "ty": "flip", "front": "Was ist ein „Stimmfach\"?", "reveal": "Die Einteilung einer Singstimme nach Lage und Klangfarbe (z. B. Sopran, Tenor, Bass)."}, {"track": "oper", "cat": "Stimmen & Gesang", "d": 2, "ty": "multi", "q": "Welche dieser Stimmlagen sind Frauenstimmen?", "opts": ["Sopran", "Mezzosopran", "Tenor", "Alt", "Bass"], "c": [0, 1, 3], "fb": "Tenor und Bass sind Männerstimmen."}, {"track": "welt", "cat": "Beste Orchester & Dirigenten", "d": 1, "ty": "mc", "q": "Wer ist aktueller Chefdirigent der Berliner Philharmoniker?", "opts": ["Simon Rattle", "Gustavo Dudamel", "Kirill Petrenko", "Andris Nelsons"], "c": 2, "fb": "Kirill Petrenko leitet Berlin; Rattle war es früher."}, {"track": "welt", "cat": "Beste Orchester & Dirigenten", "d": 2, "ty": "mc", "q": "Welches Spitzenorchester hat bewusst KEINEN festen Chefdirigenten?", "opts": ["Berliner Philharmoniker", "Wiener Philharmoniker", "London Symphony", "Gewandhaus Leipzig"], "c": 1, "fb": "Die Wiener Philharmoniker verwalten sich selbst."}, {"track": "welt", "cat": "Beste Orchester & Dirigenten", "d": 2, "ty": "gap", "q": "Der junge finnische Dirigent, der ab 2027 Concertgebouw UND Chicago übernimmt, heißt Klaus ___.", "a": ["Mäkelä", "Makela"], "fb": "Klaus Mäkelä – das Gesprächsthema der Branche."}, {"track": "welt", "cat": "Beste Orchester & Dirigenten", "d": 1, "ty": "tf", "q": "Gustavo Dudamel wurde 2026 Musikdirektor der New Yorker Philharmoniker.", "a": true, "fb": "Zuvor war er lange in Los Angeles."}, {"track": "welt", "cat": "Beste Orchester & Dirigenten", "d": 2, "ty": "flip", "front": "Wofür ist Herbert von Karajan berühmt?", "reveal": "Für den makellosen, samtigen „Karajan-Sound\" der Berliner Philharmoniker und seine prägende Schallplattenkultur."}, {"track": "welt", "cat": "Beste Orchester & Dirigenten", "d": 3, "ty": "match", "q": "Ordne Dirigent und Orchester (Stand 2026) zu.", "pairs": [["Kirill Petrenko", "Berliner Philharmoniker"], ["Simon Rattle", "BR-Symphonieorchester"], ["Antonio Pappano", "London Symphony"], ["Andris Nelsons", "Gewandhaus Leipzig"]], "fb": "Aktuelle Chefdirigenten der Spitzenorchester."}, {"track": "welt", "cat": "Beste Orchester & Dirigenten", "d": 2, "ty": "mc", "q": "Welche Orchester zählt man zu den US-„Big Five\"?", "opts": ["Chicago, Boston, New York, Philadelphia, Cleveland", "Berlin, Wien, London, Paris, Rom", "Nur Chicago und Boston", "LA und San Francisco"], "c": 0, "fb": "Die fünf traditionsreichen US-Spitzenorchester."}, {"track": "welt", "cat": "Beste Orchester & Dirigenten", "d": 3, "ty": "est", "q": "In welchem Jahr wurden die Berliner Philharmoniker gegründet?", "min": 1850, "max": 1920, "step": 1, "ans": 1882, "tol": 5, "unit": "", "fb": "Die Berliner Philharmoniker wurden 1882 gegründet."}, {"track": "welt", "cat": "Fachbegriffe", "d": 1, "ty": "gap", "q": "Das Zupfen der Saiten statt Streichen mit dem Bogen heißt ___.", "a": ["Pizzicato"], "fb": "Gegenteil: arco (mit Bogen)."}, {"track": "welt", "cat": "Fachbegriffe", "d": 2, "ty": "flip", "front": "Was ist eine Fuge?", "reveal": "Eine Satzform, in der ein Thema von mehreren Stimmen nacheinander aufgegriffen und kunstvoll verarbeitet wird."}, {"track": "welt", "cat": "Fachbegriffe", "d": 1, "ty": "flip", "front": "Was bedeutet „Crescendo\"?", "reveal": "Allmähliches Lauterwerden. Gegenteil: Decrescendo/Diminuendo."}, {"track": "welt", "cat": "Fachbegriffe", "d": 1, "ty": "mc", "q": "Was bezeichnet „Vibrato\"?", "opts": ["Ein schnelles Lauterwerden", "Ein leichtes, regelmäßiges Schwanken der Tonhöhe", "Das Zupfen der Saiten", "Eine Tanzform"], "c": 1, "fb": "Vibrato gibt dem Ton Wärme und Ausdruck."}, {"track": "welt", "cat": "Fachbegriffe", "d": 1, "ty": "gap", "q": "Ein großes, mehrsätziges Orchesterwerk (meist in vier Sätzen) heißt ___.", "a": ["Sinfonie", "Symphonie"], "fb": "Die Sinfonie ist die Königsgattung der Orchestermusik."}, {"track": "welt", "cat": "Fachbegriffe", "d": 1, "ty": "tf", "q": "„Tutti\" bedeutet, dass alle zusammen spielen.", "a": true, "fb": "Gegenteil eines Soloparts."}, {"track": "welt", "cat": "Fachbegriffe", "d": 2, "ty": "match", "q": "Ordne Begriff und Bedeutung zu.", "pairs": [["Ouvertüre", "Instrumentale Eröffnung"], ["Pizzicato", "Saiten zupfen"], ["Tutti", "Alle spielen"], ["Vibrato", "Schwankende Tonhöhe"]], "fb": "Wichtige Fachbegriffe."}]</script>
 <script>
-/* ============ DATEN ============ */
-const DECKS=[
-  {id:'epochen',name:'Epochen am Klang erkennen',ic:'🏛️',cat:'Epochen',cards:[
-    {f:'Woran erkennst du Barockmusik beim Hören?',b:'Mehrere gleichberechtigte Stimmen (Polyphonie), durchlaufender Generalbass, Terrassendynamik und oft ein hörbares Cembalo.'},
-    {f:'Was ist typisch für die Wiener Klassik?',b:'Klarheit und Balance: Melodie mit Begleitung, ebenmäßige „sprechende" Phrasen, durchsichtiger Klang, Sonatensatzform.'},
-    {f:'Welche Merkmale hat romantische Musik?',b:'Große dynamische Bögen, Rubato, reiche Harmonik, Leitmotive und üppige Orchesterfarben – Gefühl und Erzählung stehen im Vordergrund.'},
-    {f:'Wie klingt die Moderne (20./21. Jh.)?',b:'Ungewohnte Klangfarben und Rhythmen, schwebende oder fehlende Tonart, scharfe Kontraste – Regeln werden neu erfunden.'},
-    {f:'Was bedeutet „Terrassendynamik"?',b:'Lautstärke wechselt in Stufen (laut/leise) statt in fließenden Übergängen – typisch für den Barock.'},
-    {f:'Was ist die Sonatensatzform?',b:'Das klassische Bauprinzip: Exposition (Themen) – Durchführung (Verarbeitung) – Reprise (Wiederkehr).'},
-    {f:'Nenne drei zentrale Barock-Komponisten.',b:'Johann Sebastian Bach, Georg Friedrich Händel und Antonio Vivaldi.'},
-    {f:'Welche drei Komponisten bilden die „Wiener Klassik"?',b:'Joseph Haydn, Wolfgang Amadeus Mozart und Ludwig van Beethoven.'}
-  ]},
-  {id:'orchester',name:'Orchester & Instrumente',ic:'🎻',cat:'Orchester',cards:[
-    {f:'Welche vier Gruppen bilden das Sinfonieorchester?',b:'Streicher, Holzbläser, Blechbläser und Schlagwerk (oft ergänzt durch Harfe).'},
-    {f:'Welche Instrumente gehören zu den Streichern?',b:'Violine (1. & 2.), Bratsche (Viola), Violoncello und Kontrabass.'},
-    {f:'Welche Instrumente zählen zu den Holzbläsern?',b:'Flöte, Oboe, Klarinette und Fagott.'},
-    {f:'Welche Instrumente sind Blechbläser?',b:'Horn, Trompete, Posaune und Tuba.'},
-    {f:'Warum sitzen die Streicher vorn und das Blech hinten?',b:'Die leisen, zahlreichen Streicher bilden das Fundament; lautes Blech und Schlagwerk sitzen hinten/höher, damit die Balance stimmt.'},
-    {f:'Was macht der Konzertmeister?',b:'Erste(r) Geiger(in): stimmt das Orchester ein, ist Bindeglied zum Dirigenten und spielt wichtige Violin-Soli.'},
-    {f:'Welche Rolle haben die Celli im Orchester?',b:'Singende Tenor-/Bassstimme – oft die schönsten melodischen Linien und ein warmes Klangfundament.'},
-    {f:'Was ist die Aufgabe des Dirigenten?',b:'Er gestaltet Tempo, Balance, Dynamik und die große Linie und gibt Einsätze – er formt die Interpretation, ist kein bloßer Taktgeber.'},
-    {f:'Was bedeutet „Pizzicato"?',b:'Die Saiten werden mit den Fingern gezupft statt mit dem Bogen gestrichen.'},
-    {f:'Wofür sorgt die Pauke im Orchester?',b:'Für Rhythmus, Akzente und dramatische Schläge – sie ist oft der „Donner" des Orchesters.'}
-  ]},
-  {id:'hoeren',name:'Hören & Interpretation',ic:'⭐',cat:'Interpretation',cards:[
-    {f:'Was bedeutet „Rubato"?',b:'Das feine, ausdrucksvolle Dehnen und Drängen des Tempos – es lässt die Musik „atmen".'},
-    {f:'Woran erkennst du eine gute Klangbalance?',b:'Die Hauptstimme ist klar hörbar, die Begleitung tritt zurück, und die Klangfarben mischen sich zu einem Ganzen.'},
-    {f:'Was meint „Spannungsbogen" in der Musik?',b:'Spannung wird über lange Strecken aufgebaut und gezielt gelöst – statt durchweg gleich laut zu bleiben.'},
-    {f:'Was ist „Intonation"?',b:'Die Sauberkeit der Tonhöhe – das genaue Stimmen der Töne zueinander.'},
-    {f:'Was bedeutet „Phrasierung"?',b:'Das Gliedern und Formen von Melodien in sinnvolle „Sätze" – mit Betonungen, Bögen und Atempunkten.'},
-    {f:'Was ist ein Zeichen einer SCHWACHEN Interpretation?',b:'Alles bleibt „mittellaut" ohne echte Kontraste, das Tempo schleppt unmotiviert, Linien gehen im Klangbrei unter.'},
-    {f:'Wie schult man am schnellsten das Ohr?',b:'Dieselbe Stelle in zwei oder drei Aufnahmen direkt hintereinander vergleichen – so hört man, was eine Entscheidung ist.'},
-    {f:'Was bedeutet „Ensemble" in Bezug auf Qualität?',b:'Wie präzise das Orchester zusammenspielt – Einsätze, Läufe und Pausen wie aus einem Guss, als wäre es ein Instrument.'},
-    {f:'Was meint eine „Referenzaufnahme"?',b:'Eine Einspielung, die über Jahrzehnte als Maßstab gilt – nicht die einzig „richtige", aber eine besonders überzeugende.'}
-  ]},
-  {id:'opermusik',name:'Oper: Die Musik',ic:'🎶',cat:'Oper-Musik',cards:[
-    {f:'Wie werden Sängerstimmen eingeteilt?',b:'Nach Stimmfächern – nach Lage und Klangfarbe: Sopran, Mezzo/Alt (Frauen) und Tenor, Bariton, Bass (Männer). Die Stimme ist wie ein Instrument.'},
-    {f:'Was zählt musikalisch bei einer Opernstimme?',b:'Wie bei einem Instrument: Intonation, Phrasierung, Dynamik, Atemführung und das Timbre (die Klangfarbe).'},
-    {f:'Welche Rolle spielt das Orchester in der Oper?',b:'Es trägt Stimmung, Spannung und Farbe, kommentiert und treibt die Handlung – ein gleichberechtigter Mit-Erzähler, nicht bloße Begleitung.'},
-    {f:'Was ist ein „Leitmotiv"?',b:'Ein wiederkehrendes musikalisches Motiv für eine Person, Idee oder Sache – berühmt durch Richard Wagner.'},
-    {f:'Was bedeutet „Koloratur"?',b:'Schnelle, virtuose Verzierungen und Läufe der Singstimme – besonders glanzvoll bei hohen Sopranpartien.'},
-    {f:'Was meint „Belcanto"?',b:'„Schöner Gesang": ein Stil mit Betonung auf schöner, fließender Gesangslinie und Klangkultur (z. B. Bellini, Donizetti).'},
-    {f:'Worauf solltest du beim Hören einer Arie achten?',b:'Auf die Gesangslinie und Dynamik der Stimme und darauf, wie das Orchester mit ihr zusammenspielt – nicht primär auf die Bühnenhandlung.'},
-    {f:'Was ist eine Arie – musikalisch betrachtet?',b:'Eine Solo-Nummer, in der die Handlung innehält und die Musik aufblüht: der lyrische, melodische Höhepunkt einer Figur.'},
-    {f:'Warum gilt das Ensemble (mehrere Stimmen) oft als musikalischer Höhepunkt?',b:'Weil mehrere Stimmlinien gleichzeitig kunstvoll verwoben werden – ein klanglich besonders reicher, komplexer Moment.'}
-  ]},
-  {id:'opergrund',name:'Oper: Grundwissen',ic:'🎭',cat:'Oper-Grund',cards:[
-    {f:'Was ist eine Ouvertüre?',b:'Das instrumentale Vorspiel einer Oper – stimmt auf Stimmung und musikalische Themen ein.'},
-    {f:'Was ist ein Rezitativ?',b:'Sprechähnlicher Gesang, der die Handlung vorantreibt (der „Dialog").'},
-    {f:'Was ist ein Libretto?',b:'Der Text einer Oper.'},
-    {f:'Was bedeutet „Finale" in der Oper?',b:'Der große Abschluss eines Aktes, in dem die Handlungsfäden – und oft viele Stimmen – zusammenlaufen.'},
-    {f:'Nenne zwei gute Einstiegsopern.',b:'Mozarts „Zauberflöte" und Puccinis „La Bohème" – eingängige Melodien, klare Handlung.'}
-  ]},
-  {id:'welt',name:'Orchester & Dirigenten der Welt',ic:'🌍',cat:'Welt',cards:[
-    {f:'Wer ist Chefdirigent der Berliner Philharmoniker?',b:'Kirill Petrenko.'},
-    {f:'Welches Spitzenorchester hat bewusst keinen festen Chefdirigenten?',b:'Die Wiener Philharmoniker – sie verwalten sich selbst und arbeiten mit Gastdirigenten.'},
-    {f:'Welcher Dirigent übernimmt ab 2027 Concertgebouw und Chicago?',b:'Klaus Mäkelä, der gefeierte junge finnische Dirigent.'},
-    {f:'Wer wurde 2026 Musikdirektor der New Yorker Philharmoniker?',b:'Gustavo Dudamel (zuvor lange in Los Angeles).'},
-    {f:'Wer leitet seit 2023 das BR-Symphonieorchester München?',b:'Sir Simon Rattle.'},
-    {f:'Wofür ist Herbert von Karajan berühmt?',b:'Für den makellosen, samtigen „Karajan-Sound" der Berliner Philharmoniker und seine prägende Schallplattenkultur.'},
-    {f:'Warum ist Carlos Kleiber legendär?',b:'Er dirigierte sehr selten, doch seine Beethoven-Sinfonien Nr. 5 & 7 zählen zu den meistgerühmten Aufnahmen überhaupt.'},
-    {f:'Welche US-Orchester nennt man die „Big Five"?',b:'Chicago, Boston, New York, Philadelphia und Cleveland.'}
-  ]}
-];
+"use strict";
+const CFG = JSON.parse(document.getElementById('cfg').textContent);
+const QUESTIONS = JSON.parse(document.getElementById('qdata').textContent);
+QUESTIONS.forEach((q,i)=>{q._i=i;});
+const SESSION_LEN = 12;
 
-const QUIZ=[
-  {cat:'Epochen',q:'Welche Epoche kommt direkt vor der Romantik?',o:['Barock','Wiener Klassik','Moderne','Renaissance'],a:1,e:'Barock → Klassik → Romantik → Moderne. Vor der Romantik liegt die Wiener Klassik.'},
-  {cat:'Epochen',q:'Woran erkennt man typischerweise Barockmusik?',o:['Schwebende Tonalität','Mehrere verwobene Stimmen & Generalbass','Minimal Music','Elektronische Klänge'],a:1,e:'Polyphonie, durchlaufender Generalbass und Terrassendynamik sind Barock-Kennzeichen.'},
-  {cat:'Epochen',q:'Was beschreibt die Sonatensatzform?',o:['Exposition – Durchführung – Reprise','Strophe – Refrain','Intro – Solo – Outro','Frage – Antwort'],a:0,e:'Die klassische Form: Themen werden vorgestellt, verarbeitet und kehren wieder.'},
-  {cat:'Epochen',q:'Welcher Komponist gehört NICHT zur Wiener Klassik?',o:['Haydn','Mozart','Beethoven','Debussy'],a:3,e:'Debussy ist ein Komponist der Moderne (Impressionismus).'},
-  {cat:'Orchester',q:'Welche Gruppe sitzt im Orchester ganz vorn?',o:['Blechbläser','Schlagwerk','Streicher','Holzbläser'],a:2,e:'Die leisen, zahlreichen Streicher sitzen vorn; lautes Blech/Schlagwerk hinten.'},
-  {cat:'Orchester',q:'Welches Instrument gehört zu den Holzbläsern?',o:['Trompete','Oboe','Posaune','Pauke'],a:1,e:'Oboe (mit Flöte, Klarinette, Fagott). Trompete/Posaune = Blech, Pauke = Schlagwerk.'},
-  {cat:'Orchester',q:'Was macht der Konzertmeister?',o:['Dirigiert das Orchester','Stimmt ein & ist Bindeglied zum Dirigenten','Spielt Pauke','Komponiert die Stücke'],a:1,e:'Der/die erste Geiger(in) stimmt das Orchester ein und spielt Violin-Soli.'},
-  {cat:'Orchester',q:'Was bedeutet „Pizzicato"?',o:['Sehr laut spielen','Saiten zupfen statt streichen','Ohne Dirigent','Im Chor singen'],a:1,e:'Pizzicato = die Saiten werden gezupft.'},
-  {cat:'Orchester',q:'Welches ist ein Blechblasinstrument?',o:['Klarinette','Fagott','Horn','Harfe'],a:2,e:'Horn, Trompete, Posaune und Tuba bilden das Blech.'},
-  {cat:'Interpretation',q:'Was bedeutet „Rubato"?',o:['Sehr laut','Flexibles Dehnen des Tempos','Ein Streichinstrument','Ohne Noten'],a:1,e:'Rubato lässt die Musik durch feines Tempo-Spiel „atmen".'},
-  {cat:'Interpretation',q:'Was ist KEIN Zeichen einer überzeugenden Interpretation?',o:['Echte dynamische Kontraste','Reine Intonation','Durchweg gleich laut','Klar hörbare Hauptstimme'],a:2,e:'„Immer mittellaut" ist eine Schwäche – gute Deutungen leben von Kontrast.'},
-  {cat:'Interpretation',q:'Was meint „Intonation"?',o:['Lautstärke','Sauberkeit der Tonhöhe','Geschwindigkeit','Sitzordnung'],a:1,e:'Intonation = wie sauber die Töne zueinander gestimmt sind.'},
-  {cat:'Interpretation',q:'Wie schult man das Ohr am schnellsten?',o:['Nur einmal hören','Zwei Aufnahmen derselben Stelle vergleichen','Lauter drehen','Noten auswendig lernen'],a:1,e:'Der direkte Vergleich macht Interpretations-Entscheidungen hörbar.'},
-  {cat:'Oper-Musik',q:'Wonach werden Sängerstimmen eingeteilt?',o:['Nach Körpergröße','Nach Lage & Klangfarbe (Stimmfach)','Nach Alter','Nach Sprache'],a:1,e:'Stimmfächer ordnen Stimmen wie Instrumente nach Lage und Timbre.'},
-  {cat:'Oper-Musik',q:'Was ist ein „Leitmotiv"?',o:['Der Schlussakkord','Wiederkehrendes Motiv für Person/Idee','Das Textbuch','Eine Tanzform'],a:1,e:'Wiederkehrendes musikalisches Motiv, berühmt durch Wagner.'},
-  {cat:'Oper-Musik',q:'Was bedeutet „Koloratur"?',o:['Tiefer Bass-Ton','Schnelle virtuose Verzierungen der Stimme','Langsames Tempo','Ein Bühnenbild'],a:1,e:'Koloraturen sind virtuose Läufe – glanzvoll v. a. im hohen Sopran.'},
-  {cat:'Oper-Musik',q:'Welche Rolle spielt das Orchester in der Oper?',o:['Nur leise Begleitung','Mit-Erzähler: trägt Stimmung, Spannung, Farbe','Es schweigt bei Arien','Nur in der Pause'],a:1,e:'Das Orchester kommentiert, treibt und malt – gleichberechtigt mit der Stimme.'},
-  {cat:'Oper-Musik',q:'Worauf hörst du bei einer Arie vor allem?',o:['Auf das Kostüm','Auf Gesangslinie, Dynamik & Zusammenspiel mit Orchester','Auf die Untertitel','Auf den Applaus'],a:1,e:'Musikalisch zählen Linie, Dynamik und das Stimme-Orchester-Zusammenspiel.'},
-  {cat:'Oper-Grund',q:'Was ist eine Ouvertüre?',o:['Der Schlusschor','Das instrumentale Vorspiel','Eine Tanzpause','Der Text'],a:1,e:'Die Ouvertüre eröffnet die Oper instrumental.'},
-  {cat:'Oper-Grund',q:'Was ist ein Rezitativ?',o:['Solo-Gefühlsnummer','Sprechgesang, der die Handlung trägt','Ein Instrumentalsatz','Der Applaus'],a:1,e:'Das Rezitativ treibt als Sprechgesang die Handlung voran.'},
-  {cat:'Oper-Grund',q:'Was ist ein Libretto?',o:['Das Orchester','Der Text der Oper','Die Bühne','Der Dirigentenstab'],a:1,e:'Das Libretto ist der Operntext.'},
-  {cat:'Welt',q:'Wer ist Chefdirigent der Berliner Philharmoniker?',o:['Simon Rattle','Gustavo Dudamel','Kirill Petrenko','Andris Nelsons'],a:2,e:'Kirill Petrenko leitet Berlin; Rattle war es früher.'},
-  {cat:'Welt',q:'Welches Orchester hat bewusst keinen festen Chefdirigenten?',o:['Berliner Philharmoniker','Wiener Philharmoniker','London Symphony','Gewandhaus Leipzig'],a:1,e:'Die Wiener Philharmoniker verwalten sich selbst.'},
-  {cat:'Welt',q:'Welcher junge Dirigent übernimmt ab 2027 Concertgebouw UND Chicago?',o:['Klaus Mäkelä','Yannick Nézet-Séguin','Antonio Pappano','Carlos Kleiber'],a:0,e:'Der Finne Klaus Mäkelä übernimmt beide Weltorchester.'},
-  {cat:'Welt',q:'Wofür ist Herbert von Karajan berühmt?',o:['Minimal Music','Den „Karajan-Sound" der Berliner Philharmoniker','Oper-Regie','Jazz'],a:1,e:'Karajan prägte einen makellosen, samtigen Orchesterklang.'}
-];
+/* ---------- storage ---------- */
+const SK = CFG.storeKey;
+function load(){ try{return JSON.parse(localStorage.getItem(SK))||{};}catch(e){return {};} }
+function save(){ try{localStorage.setItem(SK, JSON.stringify(store));}catch(e){} }
+let store = load();
+store.xp = store.xp||0; store.sc = store.sc||0; store.sl = store.sl||"";
+store.best = store.best||{};
 
-const BADGES=[
-  {id:'first',ic:'🎵',name:'Erste Töne',desc:'Erste Lernkarte gemeistert',test:p=>p.mastered.length>=1},
-  {id:'streak3',ic:'🔥',name:'Stammgast',desc:'3 Tage in Folge gelernt',test:p=>p.streak>=3},
-  {id:'deck',ic:'📚',name:'Stapelmeister',desc:'Einen Karten-Stapel komplett gemeistert',test:p=>DECKS.some(d=>d.cards.every((_,i)=>p.mastered.indexOf(d.id+'-'+i)>-1))},
-  {id:'half',ic:'🎯',name:'Auf halbem Weg',desc:'Die Hälfte aller Karten gemeistert',test:p=>p.mastered.length>=Math.ceil(totalCards()/2)},
-  {id:'maestro',ic:'🏆',name:'Maestro',desc:'Ein Quiz mit voller Punktzahl (10/10)',test:p=>Object.values(p.quizBest).some(v=>v>=10)},
-  {id:'all',ic:'👑',name:'Virtuose',desc:'Alle Lernkarten gemeistert',test:p=>p.mastered.length>=totalCards()}
-];
+/* ---------- helpers ---------- */
+function $(id){return document.getElementById(id);}
+function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function sample(a,n){return shuffle(a).slice(0,n);}
+function today(){var d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();}
+function yesterday(){var d=new Date();d.setDate(d.getDate()-1);return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();}
+function norm(s){return (s||"").toString().toLowerCase().trim()
+  .replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss")
+  .normalize("NFD").replace(/[̀-ͯ]/g,"")
+  .replace(/[^a-z0-9]/g,"");}
+function lev(a,b){var m=a.length,n=b.length,d=[];for(var i=0;i<=m;i++)d[i]=[i];for(var j=0;j<=n;j++)d[0][j]=j;
+  for(i=1;i<=m;i++)for(j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[m][n];}
+const LETTERS="ABCDE";
 
-/* ============ STATE ============ */
-const LS='kml_progress_v1';
-function totalCards(){return DECKS.reduce((s,d)=>s+d.cards.length,0)}
-function loadP(){try{return JSON.parse(localStorage.getItem(LS))||null}catch(e){return null}}
-function blank(){return{streak:0,lastDay:null,mastered:[],review:[],quizBest:{},badges:[]}}
-let P=loadP()||blank();
-function saveP(){try{localStorage.setItem(LS,JSON.stringify(P))}catch(e){}}
-function todayStr(){return new Date().toISOString().slice(0,10)}
-function updateStreak(){
-  const t=todayStr();
-  if(P.lastDay===t)return;
-  const y=new Date(Date.now()-864e5).toISOString().slice(0,10);
-  P.streak=(P.lastDay===y)?P.streak+1:1;
-  P.lastDay=t;saveP();
+/* ---------- header ---------- */
+function refreshHeader(){
+  $('brandTitle').innerHTML = CFG.brand;
+  $('streakStat').textContent = "🔥 "+store.sc;
+  $('xpStat').textContent = "⭐ "+store.xp;
 }
-updateStreak();
+function applyTheme(){
+  if(store.theme==='dark'){document.documentElement.setAttribute('data-theme','dark');$('themeBtn').textContent='☀️';}
+  else{document.documentElement.removeAttribute('data-theme');$('themeBtn').textContent='🌙';}
+}
+$('themeBtn').onclick=function(){store.theme=(store.theme==='dark')?'light':'dark';save();applyTheme();
+  var v=store.theme==='dark'?'dark':'light';
+  document.querySelectorAll('iframe').forEach(function(fr){ if(fr.contentWindow){try{fr.contentWindow.postMessage({type:'aromarad-theme',value:v},'*');}catch(e){}} });};
 
-/* ============ NAV ============ */
-const views=[['start','Start'],['lernkarten','Lernkarten'],['quiz','Quiz'],['wissen','Wissen'],['fortschritt','Fortschritt']];
-const nav=document.getElementById('nav');
-views.forEach(([id,label])=>{const b=document.createElement('button');b.textContent=label;b.dataset.id=id;b.onclick=()=>go(id);nav.appendChild(b)});
-function go(id){
-  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));
-  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.id===id));
-  if(id==='start')renderDashboard();
-  if(id==='lernkarten')renderDeckPicker();
-  if(id==='quiz')renderQuizPicker();
-  if(id==='fortschritt')renderFortschritt();
-  window.scrollTo({top:0,behavior:'smooth'});
+/* ---------- streak ---------- */
+function bumpStreak(){
+  var t=today();
+  if(store.sl===t){} else if(store.sl===yesterday()){store.sc++;} else {store.sc=1;}
+  store.sl=t; save(); refreshHeader();
 }
 
-/* ============ TOAST ============ */
-let toastT;
-function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2600)}
-function checkBadges(){
-  BADGES.forEach(b=>{if(b.test(P)&&P.badges.indexOf(b.id)<0){P.badges.push(b.id);saveP();toast('🏅 Abzeichen: '+b.name)}});
-}
+/* ---------- home ---------- */
+let curTrack = CFG.tracks[0].id;
+function trackColor(id){var t=CFG.tracks.find(function(x){return x.id===id;});return t?t.color:'var(--brand)';}
+function catIcon(cat){return (CFG.catIcons&&CFG.catIcons[cat])|| '📖';}
 
-/* ============ DASHBOARD ============ */
-function deckMastered(d){return d.cards.filter((_,i)=>P.mastered.indexOf(d.id+'-'+i)>-1).length}
-function renderDashboard(){
-  const h=new Date().getHours();
-  document.getElementById('greet').textContent=(h<11?'Guten Morgen':h<18?'Schön, dass du da bist':'Guten Abend')+'!';
-  document.getElementById('stStreak').textContent=P.streak;
-  document.getElementById('stMastered').textContent=P.mastered.length;
-  const pct=Math.round(P.mastered.length/totalCards()*100);
-  document.getElementById('stPct').textContent=pct+'%';
-  document.getElementById('stBadges').textContent=P.badges.length;
-  document.getElementById('overallText').textContent=P.mastered.length+' / '+totalCards()+' Karten';
-  document.getElementById('overallBar').style.width=pct+'%';
-  let dp='';
-  DECKS.forEach(d=>{const m=deckMastered(d),p=Math.round(m/d.cards.length*100);
-    dp+='<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:13.5px"><span>'+d.ic+' '+d.name+'</span><span class="muted">'+m+'/'+d.cards.length+'</span></div><div class="bar"><i style="width:'+p+'%"></i></div></div>';});
-  document.getElementById('deckProgress').innerHTML=dp;
-  // recommendations: decks with least progress
-  const sorted=[...DECKS].sort((a,b)=>(deckMastered(a)/a.cards.length)-(deckMastered(b)/b.cards.length)).slice(0,3);
-  document.getElementById('recoTiles').innerHTML=sorted.map(d=>'<button class="card deck" onclick="startDeck(\''+d.id+'\')"><span class="ic">'+d.ic+'</span><h3>'+d.name+'</h3><div class="meta">'+deckMastered(d)+' / '+d.cards.length+' gemeistert</div></button>').join('');
+function renderTabs(){
+  var w=$('tabs'); w.innerHTML='';
+  CFG.tracks.forEach(function(t){
+    var b=el('button','tab'+(t.id===curTrack?' on':''), t.emoji+' '+t.label);
+    if(t.id===curTrack){b.style.background=t.color;}
+    b.onclick=function(){curTrack=t.id;renderHome();};
+    w.appendChild(b);
+  });
 }
-
-/* ============ LERNKARTEN ============ */
-function renderDeckPicker(){
-  document.getElementById('deckPicker').style.display='';
-  document.getElementById('deckRunner').style.display='none';
-  document.getElementById('deckTiles').innerHTML=DECKS.map(d=>{
-    const m=deckMastered(d),p=Math.round(m/d.cards.length*100);
-    return '<button class="card deck" onclick="startDeck(\''+d.id+'\')"><span class="ic">'+d.ic+'</span><h3>'+d.name+'</h3><div class="meta">'+m+' / '+d.cards.length+' gemeistert</div><div class="bar"><i style="width:'+p+'%"></i></div></button>';
-  }).join('');
-  const rt=document.getElementById('reviewTile');
-  if(P.review.length){rt.style.display='';document.getElementById('reviewMeta').textContent=P.review.length+' Karte(n) zum Wiederholen markiert.';}
-  else rt.style.display='none';
+function catsOf(track){
+  var map={}; var order=[];
+  QUESTIONS.forEach(function(q){ if(q.track===track){ if(!map[q.cat]){map[q.cat]=[];order.push(q.cat);} map[q.cat].push(q);} });
+  return order.map(function(c){return {cat:c,items:map[c]};});
 }
-let curDeck=null,curCards=[],curIdx=0;
-function startDeck(id){
-  if(id==='review'){curDeck={id:'review',name:'Wiederholung',cat:'Wiederholung',ic:'🔁'};
-    curCards=P.review.map(cid=>{const parts=cid.split('-');const di=parts[0],ci=parts[1];const d=DECKS.find(x=>x.id===di);return d?Object.assign({cid:cid,cat:d.cat},d.cards[+ci]):null}).filter(Boolean);}
-  else{const d=DECKS.find(x=>x.id===id);curDeck=d;curCards=d.cards.map((c,i)=>Object.assign({cid:d.id+'-'+i,cat:d.cat},c));}
-  if(!curCards.length){toast('Keine Karten vorhanden.');return;}
-  curIdx=0;
-  document.getElementById('deckPicker').style.display='none';
-  document.getElementById('deckRunner').style.display='';
-  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='lernkarten'));
-  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.id==='lernkarten'));
-  document.getElementById('deckTitle').textContent=(curDeck.ic?curDeck.ic+' ':'')+curDeck.name;
-  showCard();window.scrollTo({top:0,behavior:'smooth'});
+function diffDots(items){
+  var avg=items.reduce(function(s,q){return s+(q.d||1);},0)/items.length;
+  var n=Math.round(avg); var h='<span class="dots">';
+  for(var i=1;i<=3;i++)h+='<i class="'+(i<=n?'on':'')+'"></i>';
+  return h+'</span>';
 }
-function showCard(){
-  const c=curCards[curIdx];
-  document.getElementById('flash').classList.remove('flipped');
-  document.getElementById('fcCat').textContent=c.cat;
-  document.getElementById('fcFront').textContent=c.f;
-  document.getElementById('fcBack').textContent=c.b;
-  document.getElementById('fcProgress').textContent='Karte '+(curIdx+1)+' / '+curCards.length;
-}
-function flipCard(){document.getElementById('flash').classList.toggle('flipped')}
-function rateCard(known){
-  const c=curCards[curIdx];
-  if(known){if(P.mastered.indexOf(c.cid)<0)P.mastered.push(c.cid);
-    const ri=P.review.indexOf(c.cid);if(ri>-1)P.review.splice(ri,1);}
-  else{if(P.review.indexOf(c.cid)<0)P.review.push(c.cid);}
-  saveP();checkBadges();
-  curIdx++;
-  if(curIdx>=curCards.length){
-    document.getElementById('deckRunner').innerHTML='<div class="result card"><div class="score">✓</div><h3 style="margin-top:10px">Stapel durch!</h3><p class="muted">Du hast '+curCards.length+' Karten bearbeitet.</p><button class="btn" onclick="go(\'lernkarten\')">Weiter lernen</button> <button class="btn ghost" onclick="go(\'quiz\')">Jetzt Quiz</button></div>';
+function renderHome(){
+  $('homeView').classList.remove('hidden');
+  $('quizView').classList.add('hidden');
+  $('resultView').classList.add('hidden');
+  renderTabs();
+  var col=trackColor(curTrack);
+  var tObj=CFG.tracks.find(function(x){return x.id===curTrack;});
+  var pool=QUESTIONS.filter(function(q){return q.track===curTrack;});
+  // banner: mixed for this track
+  var bs=$('bannerSlot'); bs.innerHTML='';
+  var ban=el('div','banner');
+  ban.style.background='linear-gradient(135deg,'+col+',color-mix(in srgb,'+col+' 65%, #000))';
+  ban.innerHTML='<span class="em">🎲</span><div><b>Alles gemischt</b><small>'+pool.length+' Fragen · '+tObj.label+' · zufällig & gemischt</small></div><span class="go">›</span>';
+  ban.onclick=function(){startQuiz(function(q){return q.track===curTrack;}, '🎲 '+tObj.label, col);};
+  bs.appendChild(ban);
+  // category list
+  var list=$('catList'); list.innerHTML='';
+  if(tObj.wheel){
+    list.appendChild(el('div','sectit','Aromarad — jederzeit zum Nachschlagen'));
+    var fr=el('div','wheelFrame');
+    var th=(store.theme==='dark')?'dark':'light';
+    var ifr=document.createElement('iframe');
+    ifr.id='aromaFrame'; ifr.title='Aromarad';
+    ifr.setAttribute('src',(CFG.wheelSrc||'aromarad.html')+'?theme='+th);
+    fr.appendChild(ifr); list.appendChild(fr);
     return;
   }
-  showCard();
+  list.appendChild(el('div','sectit','Themen'));
+  catsOf(curTrack).forEach(function(g){
+    var b=el('button','cat');
+    b.innerHTML='<span class="ic">'+catIcon(g.cat)+'</span>'+
+      '<span class="tx"><b>'+g.cat+'</b><small>'+g.items.length+' Fragen '+diffDots(g.items)+'</small></span>'+
+      '<span class="ct">›</span>';
+    b.onclick=function(){startQuiz(function(q){return q.track===curTrack&&q.cat===g.cat;}, g.cat, col);};
+    list.appendChild(b);
+  });
 }
 
-/* ============ QUIZ ============ */
-function renderQuizPicker(){
-  document.getElementById('quizPicker').style.display='';
-  document.getElementById('quizRunner').style.display='none';
-  const cats=[];QUIZ.forEach(q=>{if(cats.indexOf(q.cat)<0)cats.push(q.cat)});
-  const labels={'Epochen':'🏛️ Epochen','Orchester':'🎻 Orchester','Interpretation':'⭐ Interpretation','Oper-Musik':'🎶 Oper: Musik','Oper-Grund':'🎭 Oper: Grundwissen','Welt':'🌍 Welt'};
-  let html='<button class="card deck" onclick="startQuiz(\'__all__\')"><span class="ic">🎲</span><h3>Alles gemischt</h3><div class="meta">'+bestText('__all__')+'</div></button>';
-  cats.forEach(c=>{html+='<button class="card deck" onclick="startQuiz(\''+c+'\')"><span class="ic"> </span><h3>'+(labels[c]||c)+'</h3><div class="meta">'+QUIZ.filter(q=>q.cat===c).length+' Fragen · '+bestText(c)+'</div></button>';});
-  document.getElementById('quizTiles').innerHTML=html;
+/* ---------- quiz session ---------- */
+let S=null;
+function startQuiz(filter, label, color){
+  var pool=QUESTIONS.filter(filter);
+  var queue=sample(pool, Math.min(SESSION_LEN, pool.length));
+  S={queue:queue,pos:0,correct:0,xp:0,label:label,color:color||'var(--brand)',filter:filter};
+  $('homeView').classList.add('hidden');
+  $('resultView').classList.add('hidden');
+  $('quizView').classList.remove('hidden');
+  renderQ();
 }
-function bestText(k){const b=P.quizBest[k];return b?('Bestwert: '+b):'noch kein Bestwert'}
-let qPool=[],qi=0,qScore=0,qAnswered=false,qKey='';
-function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const tmp=a[i];a[i]=a[j];a[j]=tmp;}return a}
-function startQuiz(key){
-  qKey=key;
-  const pool=key==='__all__'?QUIZ:QUIZ.filter(q=>q.cat===key);
-  qPool=shuffle(pool).slice(0,Math.min(10,pool.length));
-  qi=0;qScore=0;
-  document.getElementById('quizPicker').style.display='none';
-  document.getElementById('quizRunner').style.display='';
-  renderQ();window.scrollTo({top:0,behavior:'smooth'});
+$('quizBack').onclick=function(){ if(confirm('Quiz beenden und zurück?')) renderHome(); };
+
+function setFoot(buttons){ // buttons: array of {label,cls,fn,disabled}
+  var f=$('footSlot'); f.innerHTML='';
+  buttons.forEach(function(b){
+    var btn=el('button','btn'+(b.cls?' '+b.cls:''), b.label);
+    if(b.disabled)btn.disabled=true;
+    btn.onclick=b.fn; f.appendChild(btn); b._el=btn;
+  });
 }
+function progress(){
+  $('pbarFill').style.width=((S.pos)/S.queue.length*100)+'%';
+  $('qcount').textContent=(S.pos+1)+' / '+S.queue.length;
+}
+function next(){ S.pos++; if(S.pos>=S.queue.length){finish();} else {renderQ();} }
+function nextBtn(){ var last=(S.pos+1>=S.queue.length); setFoot([{label:last?'Ergebnis ansehen':'Weiter ›',fn:next}]); }
+
+let answered=false;
+function reveal(correct, q, opts){
+  if(answered)return; answered=true;
+  opts=opts||{};
+  var gain=0;
+  if(correct){ gain = 10 + ((q.d||1)-1)*5; S.correct++; }
+  else if(opts.self){ gain=0; }
+  if(opts.self && correct){ gain = 6 + ((q.d||1)-1)*3; }
+  S.xp+=gain; store.xp+=gain; save(); refreshHeader();
+  // feedback box
+  var fb=$('cardFb');
+  if(fb){
+    fb.className='fb show '+(correct?'ok':'no');
+    var head = opts.self ? (correct?'Stark! ✓':'Beim nächsten Mal ✗') : (correct?'Richtig ✓':'Nicht ganz ✗');
+    var body = q.fb || opts.body || '';
+    fb.innerHTML='<span class="h">'+head+(gain?'  +'+gain+' XP':'')+'</span><span class="x">'+body+'</span>';
+  }
+  nextBtn();
+}
+
+function buildQ(q){
+  var k='<span class="kicker t-'+q.ty+'">'+kickerLabel(q.ty)+'</span>';
+  var card=el('div','card');
+  card.innerHTML=k;
+  var qt = q.q || q.front || q.prompt || '';
+  if(q.ty!=='flip') card.appendChild(el('div','qtext', qt));
+  return card;
+}
+function kickerLabel(ty){
+  return ({mc:'Frage',multi:'Mehrfachauswahl',tf:'Wahr oder Falsch',odd:'Ausreißer finden',
+    match:'Zuordnen',order:'Sortieren',gap:'Lückentext',est:'Schätzen',flip:'Lernkarte',recall:'Selbsttest'})[ty]||'Frage';
+}
+
 function renderQ(){
-  qAnswered=false;
-  document.getElementById('qbar').style.width=(qi/qPool.length*100)+'%';
-  const it=qPool[qi];
-  let html='<div class="q"><div class="qnum">Frage '+(qi+1)+' / '+qPool.length+'</div><h3>'+it.q+'</h3>';
-  it.o.forEach((o,i)=>{html+='<button class="opt" data-i="'+i+'">'+o+'</button>';});
-  html+='<div id="exp"></div><div class="quiz-foot"><span class="muted">Punkte: <b id="sc">'+qScore+'</b></span><button class="btn" id="next" disabled>Weiter</button></div></div>';
-  document.getElementById('quizArea').innerHTML=html;
-  document.querySelectorAll('#quizArea .opt').forEach(b=>b.onclick=function(){pick(+b.dataset.i)});
-  document.getElementById('next').onclick=function(){qi++;qi<qPool.length?renderQ():finishQuiz()};
-}
-function pick(i){
-  if(qAnswered)return;qAnswered=true;
-  const it=qPool[qi],opts=document.querySelectorAll('#quizArea .opt');
-  opts.forEach((b,idx)=>{b.disabled=true;if(idx===it.a)b.classList.add('correct');if(idx===i&&i!==it.a)b.classList.add('wrong')});
-  if(i===it.a){qScore++;document.getElementById('sc').textContent=qScore}
-  document.getElementById('exp').innerHTML='<div class="explain">'+(i===it.a?'✓ Richtig! ':'✗ Nicht ganz. ')+it.e+'</div>';
-  const n=document.getElementById('next');n.disabled=false;n.textContent=qi===qPool.length-1?'Ergebnis':'Weiter';
-}
-function finishQuiz(){
-  document.getElementById('qbar').style.width='100%';
-  if(!P.quizBest[qKey]||qScore>P.quizBest[qKey]){P.quizBest[qKey]=qScore;saveP()}
-  checkBadges();
-  let msg=qScore>=qPool.length?'Perfekt! Maestro-Niveau.':qScore>=qPool.length*0.7?'Stark – sitzt schon gut.':qScore>=qPool.length*0.5?'Solide. Noch eine Runde?':'Guter Anfang – ab zu den Lernkarten.';
-  document.getElementById('quizArea').innerHTML='<div class="q result"><div class="score">'+qScore+'/'+qPool.length+'</div><h3 style="margin-top:10px">'+msg+'</h3><div style="margin-top:8px"><button class="btn" onclick="startQuiz(\''+qKey+'\')">Nochmal</button> <button class="btn ghost" onclick="go(\'quiz\')">Anderes Thema</button></div></div>';
+  answered=false; progress();
+  var q=S.queue[S.pos];
+  var slot=$('cardSlot'); slot.innerHTML='';
+  var card=buildQ(q);
+  slot.appendChild(card);
+  var fb=el('div','fb'); fb.id='cardFb'; card.appendChild(fb);
+  // type-specific
+  if(q.ty==='mc'||q.ty==='odd') renderMC(q,card);
+  else if(q.ty==='multi') renderMulti(q,card);
+  else if(q.ty==='tf') renderTF(q,card);
+  else if(q.ty==='match') renderMatch(q,card);
+  else if(q.ty==='order') renderOrder(q,card);
+  else if(q.ty==='gap') renderGap(q,card);
+  else if(q.ty==='est') renderEst(q,card);
+  else if(q.ty==='flip') renderFlip(q,card);
+  else if(q.ty==='recall') renderRecall(q,card);
+  else { card.appendChild(el('div','qsub','(unbekannter Typ)')); nextBtn(); }
+  window.scrollTo(0,0);
 }
 
-/* ============ WISSEN ============ */
-const wsecs=[['epochen','Epochen'],['oper','Oper'],['orchester','Orchester'],['interpretation','Interpretation'],['welt','Beste der Welt'],['glossar','Glossar']];
-const wnav=document.getElementById('wissenNav');
-wsecs.forEach(function(pair,idx){const id=pair[0],l=pair[1];const b=document.createElement('button');b.textContent=l;if(idx===0)b.classList.add('active');
-  b.onclick=function(){document.querySelectorAll('#wissenNav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.wsec').forEach(s=>s.classList.toggle('active',s.id==='w-'+id))};
-  wnav.appendChild(b)});
-
-const orch={
-  v1:{g:'Streicher',t:'Erste Violinen',d:'Tragen meist die Hauptmelodie, vorn links. Angeführt vom Konzertmeister.'},
-  v2:{g:'Streicher',t:'Zweite Violinen',d:'Stützen die ersten, übernehmen Gegenstimmen und das rhythmische Rückgrat.'},
-  va:{g:'Streicher',t:'Bratschen',d:'Die Altstimme der Streicher – dunkler als die Violine, geben Wärme in der Mitte.'},
-  vc:{g:'Streicher',t:'Violoncelli',d:'Singende Tenor-/Bassstimme – oft die schönsten Melodien und ein warmes Fundament.'},
-  cb:{g:'Streicher',t:'Kontrabässe',d:'Das tiefe Fundament des Orchesters – Bass und Wucht.'},
-  ww:{g:'Holzbläser',t:'Holzbläser',d:'Flöte, Oboe, Klarinette, Fagott – charakterstarke Farben und Soli.'},
-  br:{g:'Blechbläser',t:'Blechbläser',d:'Horn, Trompete, Posaune, Tuba – Glanz, Kraft und feierliche Höhepunkte.'},
-  pe:{g:'Schlagwerk',t:'Schlagwerk',d:'Pauken, Becken, Trommeln – Rhythmus, Akzente und dramatische Schläge.'},
-  hp:{g:'Harfe',t:'Harfe',d:'Glitzernde Arpeggien und Farbtupfer, v. a. in Romantik und Impressionismus.'},
-  co:{g:'Leitung',t:'Dirigent/in',d:'Gestaltet Tempo, Balance, Dynamik und die große Linie; gibt Einsätze.'}
-};
-let selSeg=null;
-document.querySelectorAll('.seg').forEach(g=>g.addEventListener('click',function(){
-  const info=orch[g.dataset.k];if(!info)return;
-  if(selSeg)selSeg.classList.remove('sel');g.classList.add('sel');selSeg=g;
-  document.getElementById('orchInfo').innerHTML='<span class="pill">'+info.g+'</span><h3 style="margin-top:12px">'+info.t+'</h3><p class="muted">'+info.d+'</p>';
-}));
-
-const gloss=[
-  ['Arie','Solo-Gesangsstück; die Handlung hält inne und die Musik blüht auf.'],
-  ['Belcanto','„Schöner Gesang" – Stil mit Betonung auf fließender, schöner Gesangslinie.'],
-  ['Cembalo','Barockes Tasteninstrument; Saiten werden gezupft statt angeschlagen.'],
-  ['Crescendo','Allmähliches Lauterwerden (Gegenteil: Decrescendo).'],
-  ['Dynamik','Lautstärkegestaltung von leise (piano) bis laut (forte).'],
-  ['Ensemble','Mehrere Sänger/Musiker zugleich – oft musikalischer Höhepunkt.'],
-  ['Fuge','Satzform, in der ein Thema von mehreren Stimmen nacheinander aufgegriffen wird.'],
-  ['Generalbass','Barocke Bassbegleitung, über der Akkorde frei ausgefüllt werden.'],
-  ['Intonation','Sauberkeit der Tonhöhe – das Stimmen der Töne zueinander.'],
-  ['Koloratur','Schnelle, virtuose Verzierungen der Singstimme.'],
-  ['Konzertmeister','Erste(r) Geiger(in); Bindeglied zwischen Orchester und Dirigent.'],
-  ['Leitmotiv','Wiederkehrendes Motiv für Person/Idee (v. a. bei Wagner).'],
-  ['Libretto','Der Text einer Oper.'],
-  ['Ouvertüre','Instrumentale Eröffnung einer Oper oder eines Werks.'],
-  ['Phrasierung','Das Gliedern und Formen von Melodien in sinnvolle „Sätze".'],
-  ['Pizzicato','Zupfen der Saiten statt Streichen mit dem Bogen.'],
-  ['Rezitativ','Sprechähnlicher Gesang, der die Handlung vorantreibt.'],
-  ['Rubato','Ausdrucksvolles, freies Dehnen und Drängen des Tempos.'],
-  ['Sinfonie','Großes mehrsätziges Orchesterwerk, meist in vier Sätzen.'],
-  ['Stimmfach','Kategorie einer Singstimme nach Lage und Klangfarbe.'],
-  ['Terrassendynamik','Lautstärkewechsel in Stufen statt fließend – typisch Barock.'],
-  ['Timbre','Die Klangfarbe einer Stimme oder eines Instruments.'],
-  ['Tutti','Alle spielen zusammen (Gegenteil eines Soloparts).'],
-  ['Vibrato','Leichtes, regelmäßiges Schwanken der Tonhöhe für Wärme & Ausdruck.']
-];
-const glossList=document.getElementById('glossList');
-function renderGloss(f){f=(f||'').toLowerCase();glossList.innerHTML='';
-  gloss.forEach(function(p){const t=p[0],d=p[1];if(f&&t.toLowerCase().indexOf(f)<0&&d.toLowerCase().indexOf(f)<0)return;
-    const dt=document.createElement('dt');dt.textContent=t;const dd=document.createElement('dd');dd.textContent=d;glossList.appendChild(dt);glossList.appendChild(dd)});
-  if(!glossList.children.length)glossList.innerHTML='<p class="muted">Kein Begriff gefunden.</p>'}
-renderGloss();
-document.getElementById('glossSearch').addEventListener('input',function(e){renderGloss(e.target.value)});
-
-/* ============ FORTSCHRITT ============ */
-function renderFortschritt(){
-  document.getElementById('fStreak').textContent=P.streak;
-  document.getElementById('fMastered').textContent=P.mastered.length;
-  const best=Object.values(P.quizBest);document.getElementById('fQuiz').textContent=best.length?(Math.max.apply(null,best)+'/10'):'–';
-  document.getElementById('fBadges').textContent=P.badges.length;
-  document.getElementById('badgeList').innerHTML=BADGES.map(function(b){const got=P.badges.indexOf(b.id)>-1;
-    return '<div class="badge'+(got?'':' locked')+'"><div class="bic">'+(got?b.ic:'🔒')+'</div><div><b>'+b.name+'</b><p>'+b.desc+'</p></div></div>'}).join('');
+/* MC + odd */
+function renderMC(q,card){
+  var wrap=el('div','opts'); card.insertBefore(wrap, $('cardFb'));
+  var idx=q.opts.map(function(_,i){return i;});
+  var order=shuffle(idx);
+  var btns=[];
+  order.forEach(function(origIdx,pos){
+    var b=el('button','opt');
+    b.innerHTML='<span class="k">'+LETTERS[pos]+'</span><span>'+q.opts[origIdx]+'</span>';
+    b.onclick=function(){
+      if(answered)return;
+      var correct = origIdx===q.c;
+      btns.forEach(function(o){o.b.disabled=true;});
+      b.classList.add(correct?'correct':'wrong');
+      if(!correct){ // also show correct one
+        btns.forEach(function(o){ if(o.origIdx===q.c) o.b.classList.add('correct'); });
+      }
+      reveal(correct,q);
+    };
+    btns.push({b:b,origIdx:origIdx}); wrap.appendChild(b);
+  });
+  setFoot([{label:'Wähle eine Antwort',fn:function(){},disabled:true}]);
 }
-function resetProgress(){if(confirm('Wirklich den gesamten Fortschritt löschen?')){P=blank();updateStreak();saveP();toast('Fortschritt zurückgesetzt');renderFortschritt();}}
 
-/* init */
-renderDashboard();
+/* multi */
+function renderMulti(q,card){
+  card.insertBefore(el('div','qsub','Mehrere Antworten richtig – wähle alle aus.'), $('cardFb'));
+  var wrap=el('div','opts'); card.insertBefore(wrap, $('cardFb'));
+  var order=shuffle(q.opts.map(function(_,i){return i;}));
+  var sel={};
+  var btns=[];
+  order.forEach(function(origIdx,pos){
+    var b=el('button','opt');
+    b.innerHTML='<span class="k">'+LETTERS[pos]+'</span><span>'+q.opts[origIdx]+'</span>';
+    b.onclick=function(){ if(answered)return; sel[origIdx]=!sel[origIdx]; b.classList.toggle('sel',sel[origIdx]); updateFoot(); };
+    btns.push({b:b,origIdx:origIdx}); wrap.appendChild(b);
+  });
+  function ready(){return Object.keys(sel).filter(function(k){return sel[k];}).length>0;}
+  function updateFoot(){ if(S._mf)S._mf.disabled=!ready(); }
+  function check(){
+    if(answered)return;
+    var picked=Object.keys(sel).filter(function(k){return sel[k];}).map(Number).sort();
+    var corr=q.c.slice().sort();
+    var ok = picked.length===corr.length && picked.every(function(v,i){return v===corr[i];});
+    btns.forEach(function(o){
+      var isC=q.c.indexOf(o.origIdx)>=0, isP=!!sel[o.origIdx];
+      o.b.disabled=true; o.b.classList.remove('sel');
+      if(isC) o.b.classList.add('correct');
+      else if(isP) o.b.classList.add('wrong');
+    });
+    reveal(ok,q);
+  }
+  setFoot([{label:'Prüfen',fn:check,disabled:true}]); S._mf=$('footSlot').firstChild;
+}
+
+/* true/false */
+function renderTF(q,card){
+  var wrap=el('div','tf'); card.insertBefore(wrap,$('cardFb'));
+  [['Wahr','✓',true],['Falsch','✗',false]].forEach(function(o){
+    var b=el('button',null,'<span class="e">'+o[1]+'</span>'+o[0]);
+    b.onclick=function(){
+      if(answered)return;
+      var correct = (o[2]===q.a);
+      wrap.querySelectorAll('button').forEach(function(x){x.disabled=true;});
+      b.classList.add(correct?'correct':'wrong');
+      if(!correct){ wrap.querySelectorAll('button')[q.a?0:1].classList.add('correct'); }
+      reveal(correct,q);
+    };
+    wrap.appendChild(b);
+  });
+  setFoot([{label:'Wahr oder Falsch?',fn:function(){},disabled:true}]);
+}
+
+/* match */
+function renderMatch(q,card){
+  card.insertBefore(el('div','qsub','Tippe links, dann den passenden Partner rechts.'),$('cardFb'));
+  var lefts=q.pairs.map(function(p){return p[0];});
+  var rights=q.pairs.map(function(p,i){return {txt:p[1],orig:i};});
+  var rOrder=shuffle(rights);
+  var wrap=el('div','match'); card.insertBefore(wrap,$('cardFb'));
+  var lc=el('div','mcol'), rc=el('div','mcol');
+  wrap.appendChild(lc); wrap.appendChild(rc);
+  var assign={}; // leftIndex -> position in rOrder
+  var activeL=null; var lEls=[],rEls=[];
+  lefts.forEach(function(t,i){
+    var b=el('button','mitem','<span>'+t+'</span>');
+    b.onclick=function(){ if(answered)return;
+      if(assign[i]!=null){ // clear
+        var rp=assign[i]; delete assign[i]; rEls[rp].classList.remove('used'); rEls[rp].dataset.l='';
+        b.querySelector('.mbadge')&&b.querySelector('.mbadge').remove(); refresh();
+        return;
+      }
+      activeL=(activeL===i?null:i); refresh();
+    };
+    lEls.push(b); lc.appendChild(b);
+  });
+  rOrder.forEach(function(r,p){
+    var b=el('button','mitem','<span>'+r.txt+'</span>');
+    b.onclick=function(){ if(answered)return; if(activeL==null)return; if(b.classList.contains('used'))return;
+      assign[activeL]=p; b.classList.add('used'); b.dataset.l=activeL;
+      var badge=lEls[activeL].querySelector('.mbadge'); if(!badge){badge=el('span','mbadge');lEls[activeL].appendChild(badge);}
+      badge.textContent=(p+1); var rb=el('span','mbadge');rb.textContent=(p+1);
+      // tag right with same number
+      b.querySelector('.mbadge')&&b.querySelector('.mbadge').remove(); b.appendChild(rb);
+      activeL=null; refresh();
+    };
+    rEls.push(b); rc.appendChild(b);
+  });
+  function refresh(){
+    lEls.forEach(function(b,i){b.classList.toggle('active',activeL===i);});
+    if(S._mf)S._mf.disabled=Object.keys(assign).length<lefts.length;
+  }
+  function check(){
+    if(answered)return; var ok=true;
+    lefts.forEach(function(t,i){
+      var p=assign[i]; var chosen=rOrder[p]; var correct=chosen&&chosen.orig===i;
+      if(!correct)ok=false;
+      lEls[i].classList.add(correct?'correct':'wrong');
+      lEls[i].disabled=true;
+    });
+    rEls.forEach(function(b){b.disabled=true;});
+    // build answer key in fb
+    var key=q.pairs.map(function(p){return '<b>'+p[0]+'</b> → '+p[1];}).join('<br>');
+    reveal(ok,q,{body:(q.fb?q.fb+'<br><br>':'')+key});
+  }
+  setFoot([{label:'Prüfen',fn:check,disabled:true}]); S._mf=$('footSlot').firstChild;
+}
+
+/* order */
+function renderOrder(q,card){
+  card.insertBefore(el('div','qsub','Bringe in die richtige Reihenfolge (▲▼).'),$('cardFb'));
+  var arr=shuffle(q.items.map(function(t,i){return {t:t,orig:i};}));
+  // ensure not already perfectly sorted
+  if(arr.every(function(x,i){return x.orig===i;}) && arr.length>1){ var t=arr[0];arr[0]=arr[1];arr[1]=t; }
+  var wrap=el('div','order'); card.insertBefore(wrap,$('cardFb'));
+  function draw(){
+    wrap.innerHTML='';
+    arr.forEach(function(it,i){
+      var row=el('div','oitem');
+      row.innerHTML='<span class="num">'+(i+1)+'</span><span class="lbl">'+it.t+'</span>';
+      var ar=el('div','arrows');
+      var up=el('button',null,'▲'), dn=el('button',null,'▼');
+      up.disabled=(i===0); dn.disabled=(i===arr.length-1);
+      up.onclick=function(){if(answered)return;var t=arr[i];arr[i]=arr[i-1];arr[i-1]=t;draw();};
+      dn.onclick=function(){if(answered)return;var t=arr[i];arr[i]=arr[i+1];arr[i+1]=t;draw();};
+      ar.appendChild(up);ar.appendChild(dn);row.appendChild(ar);
+      wrap.appendChild(row);
+    });
+  }
+  draw();
+  function check(){
+    if(answered)return; var ok=arr.every(function(x,i){return x.orig===i;});
+    wrap.querySelectorAll('.oitem').forEach(function(row,i){
+      row.classList.add(arr[i].orig===i?'correct':'wrong');
+      row.querySelectorAll('button').forEach(function(b){b.disabled=true;});
+    });
+    var key='Richtig: '+q.items.map(function(t,i){return (i+1)+'. '+t;}).join(' · ');
+    reveal(ok,q,{body:(q.fb?q.fb+'<br><br>':'')+key});
+  }
+  setFoot([{label:'Prüfen',fn:check}]);
+}
+
+/* gap */
+function renderGap(q,card){
+  var inp=el('input','gapin'); inp.type='text'; inp.placeholder='Antwort eingeben…';
+  inp.autocomplete='off'; inp.autocapitalize='off'; inp.spellcheck=false;
+  card.insertBefore(inp,$('cardFb'));
+  function check(){
+    if(answered)return; var v=norm(inp.value);
+    if(!v)return;
+    var acc=q.a.map(norm);
+    var ok = acc.some(function(a){ return a===v || (a.length>4 && lev(a,v)<=1) || (a.length>6 && (v.indexOf(a)>=0||a.indexOf(v)>=0)); });
+    inp.disabled=true; inp.style.borderColor=ok?'var(--good)':'var(--bad)';
+    inp.style.background=ok?'var(--good-soft)':'var(--bad-soft)';
+    reveal(ok,q,{body:(q.fb?q.fb+'<br><br>':'')+'Akzeptiert: <b>'+q.a[0]+'</b>'});
+  }
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter')check();});
+  setTimeout(function(){inp.focus();},100);
+  setFoot([{label:'Prüfen',fn:check}]);
+}
+
+/* estimate */
+function renderEst(q,card){
+  var box=el('div','est'); card.insertBefore(box,$('cardFb'));
+  var start=Math.round((q.min+q.max)/2/ (q.step||1))*(q.step||1);
+  var val=el('div','estval');
+  var rng=el('input','estrange'); rng.type='range'; rng.min=q.min;rng.max=q.max;rng.step=q.step||1;rng.value=start;
+  function fmt(v){return v+(q.unit?(' '+q.unit):'');}
+  val.textContent=fmt(start);
+  rng.oninput=function(){val.textContent=fmt(rng.value);};
+  var mm=el('div','estminmax','<span>'+fmt(q.min)+'</span><span>'+fmt(q.max)+'</span>');
+  box.appendChild(val);box.appendChild(rng);box.appendChild(mm);
+  function check(){
+    if(answered)return; var v=Number(rng.value); rng.disabled=true;
+    var ok=Math.abs(v-q.ans)<=q.tol;
+    val.style.color=ok?'var(--good)':'var(--bad)';
+    reveal(ok,q,{body:(q.fb?q.fb+'<br><br>':'')+'Deine Schätzung: <b>'+fmt(v)+'</b> · Richtig: <b>'+fmt(q.ans)+'</b> (±'+q.tol+')'});
+  }
+  setFoot([{label:'Prüfen',fn:check}]);
+}
+
+/* flip */
+function renderFlip(q,card){
+  card.insertBefore(el('div','qsub','Überlege, dann Antwort zeigen:'),$('cardFb'));
+  var fc=el('div','flipcard', q.front); card.insertBefore(fc,$('cardFb'));
+  function flip(){ fc.innerHTML=q.reveal; fc.style.borderColor='var(--brand)';
+    setFoot([{label:'❌ Wusste ich nicht',cls:'ghost',fn:function(){reveal(false,q,{self:true,body:q.reveal});}},
+             {label:'✅ Gewusst',cls:'good',fn:function(){reveal(true,q,{self:true,body:q.reveal});}}]);
+    try{fc.scrollIntoView({block:'center',behavior:'smooth'});}catch(e){} }
+  setFoot([{label:'Antwort zeigen',fn:flip}]);
+}
+
+/* recall */
+function renderRecall(q,card){
+  if(q.hint) card.insertBefore(el('div','hintbox','💡 Tipp: '+q.hint),$('cardFb'));
+  function show(){
+    var mb=el('div','modelbox','<b>Musterantwort:</b><br>'+q.model); card.insertBefore(mb,$('cardFb'));
+    try{mb.scrollIntoView({block:'center',behavior:'smooth'});}catch(e){}
+    setFoot([{label:'❌ Wusste ich nicht',cls:'ghost',fn:function(){reveal(false,q,{self:true,body:q.model});}},
+             {label:'✅ Gewusst',cls:'good',fn:function(){reveal(true,q,{self:true,body:q.model});}}]);
+  }
+  setFoot([{label:'Musterantwort zeigen',fn:show}]);
+}
+
+/* ---------- result ---------- */
+function finish(){
+  $('pbarFill').style.width='100%';
+  bumpStreak();
+  var n=S.queue.length, c=S.correct, pct=Math.round(c/n*100);
+  var key=S.label; if((store.best[key]||0)<pct){store.best[key]=pct;save();}
+  $('quizView').classList.add('hidden');
+  $('resultView').classList.remove('hidden');
+  var ring=$('resRing');
+  var col = pct>=80?'var(--good)':(pct>=50?'var(--gold)':'var(--bad)');
+  ring.style.background='conic-gradient('+col+' '+pct+'%, var(--line) 0)';
+  ring.innerHTML='<div style="width:104px;height:104px;border-radius:50%;background:var(--card);display:grid;place-items:center;color:var(--ink);font-size:30px">'+pct+'%</div>';
+  var emo = pct>=80?'🏆':(pct>=50?'👍':'📚');
+  $('resTitle').textContent = emo+' '+c+' von '+n+' richtig';
+  $('resSub').textContent = S.label;
+  $('resPills').innerHTML='<span class="pill">+'+S.xp+' XP</span><span class="pill">🔥 '+store.sc+' Tage</span><span class="pill">Bestwert: '+store.best[key]+'%</span>';
+  $('resAgain').onclick=function(){startQuiz(S.filter,S.label,S.color);};
+  $('resHome').onclick=function(){ renderHome();};
+}
+
+/* ---------- floating aromarad button ---------- */
+function initWheelFab(){
+  if(!CFG.tracks.some(function(t){return t.wheel;})) return;
+  var st=document.createElement('style');
+  st.textContent='.fab{position:fixed;left:14px;bottom:calc(88px + env(safe-area-inset-bottom));z-index:55;width:52px;height:52px;border-radius:50%;background:var(--brand);color:#fff;font-size:24px;display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.3);border:2px solid var(--card)}'
+    +'.fab:active{transform:translateY(1px)}'
+    +'.fab .fabi{line-height:1;transform:translateY(1px)}'
+    +'.sheet{position:fixed;inset:0;z-index:80;background:var(--bg);display:none;flex-direction:column}'
+    +'.sheet.on{display:flex}'
+    +'.sheetbar{display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;border-bottom:1px solid var(--line);background:var(--card)}'
+    +'.sheetbar b{flex:1;font-weight:800;font-size:16px}'
+    +'.sheetbar button{font-size:19px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:6px 12px}'
+    +'.sheet iframe{flex:1;width:100%;border:0;display:block}';
+  document.head.appendChild(st);
+  document.body.classList.add('has-fab');
+  var fab=el('button','fab','<span class="fabi">🎡</span>'); fab.setAttribute('aria-label','Aromarad öffnen');
+  var sheet=el('div','sheet');
+  var bar=el('div','sheetbar'); var title=el('b',null,'🎡 Aromarad'); var close=el('button',null,'✕'); close.setAttribute('aria-label','Schließen');
+  bar.appendChild(title); bar.appendChild(close);
+  var ifr=document.createElement('iframe'); ifr.id='aromaFabFrame'; ifr.title='Aromarad';
+  sheet.appendChild(bar); sheet.appendChild(ifr);
+  document.body.appendChild(fab); document.body.appendChild(sheet);
+  fab.onclick=function(){ if(!ifr.getAttribute('src')){ ifr.setAttribute('src',(CFG.wheelSrc||'aromarad.html')+'?theme='+((store.theme==='dark')?'dark':'light')); } sheet.classList.add('on'); };
+  close.onclick=function(){ sheet.classList.remove('on'); };
+}
+
+/* ---------- init ---------- */
+applyTheme(); refreshHeader(); renderHome(); initWheelFab();
+</script>
+
+<style id="dl-style">
+/* --- Einhand-Layout: Quiz-Inhalt nach unten --- */
+.wrap{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh;box-sizing:border-box}
+.wrap>header{flex:0 0 auto}
+#quizView:not(.hidden){flex:1 1 auto;display:flex;flex-direction:column;min-height:0}
+#quizView #cardSlot{flex:1 1 auto;display:flex;flex-direction:column;overflow:auto;min-height:0}
+#quizView #cardSlot>.card{margin-top:auto}
+#quizView .foot{flex:0 0 auto}
+#resultView:not(.hidden){flex:1 1 auto;display:flex;flex-direction:column;justify-content:center}
+/* --- Lern-Overlay (Duolingo-Stil) --- */
+.dlov{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column}
+.dlov *{box-sizing:border-box}
+.dlov .dlhead{flex:0 0 auto;padding:20px 18px 6px}
+.dlov .dlkick{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.6;font-weight:800}
+.dlov .dltitle{font-size:24px;font-weight:800;margin-top:4px;line-height:1.15}
+.dlov .dlscroll{flex:1 1 auto;overflow:auto;padding:10px 18px 18px;min-height:0;-webkit-overflow-scrolling:touch}
+.dlov .dllead{font-size:16px;line-height:1.5;margin:6px 0 14px;opacity:.92}
+.dlov .dlpt{display:flex;gap:11px;align-items:flex-start;padding:12px 13px;border-radius:14px;margin:9px 0;font-size:15px;line-height:1.4}
+.dlov .dlpt .dld{flex:0 0 auto;width:23px;height:23px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff}
+.dlov .dlmore{margin-top:16px;font-size:14px;line-height:1.5;border-radius:14px;padding:13px 14px}
+.dlov .dlmore b{display:block;margin-bottom:5px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.dlov .dlfoot{flex:0 0 auto;padding:12px 18px calc(16px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:6px}
+.dlov .dlgo{border:none;border-radius:16px;padding:17px;font-size:17px;font-weight:800;color:#fff;cursor:pointer;width:100%}
+.dlov .dlgo:active{filter:brightness(.93)}
+.dlov .dlskip{background:none;border:none;font-size:13px;opacity:.55;cursor:pointer;padding:8px;color:inherit}
+</style>
+<script id="dl-lessons" type="application/json">{"cats": {"Epochen & Stil": {"lead": "Die abendländische Kunstmusik gliedert sich grob in vier Epochen – jede klingt anders.", "points": ["Barock (ca. 1600–1750): Polyphonie, Generalbass, Cembalo.", "Wiener Klassik (ca. 1750–1820): Klarheit, Balance, Sonatensatzform.", "Romantik (ca. 1820–1900): Gefühl, Farbe, große Bögen, Rubato.", "Moderne (ab ca. 1900): neue Klänge, Atonalität, Kontraste."], "more": "Kennt man die Klangsprache, ordnet man ein Stück oft nach wenigen Takten ein."}, "Das Orchester": {"lead": "Ein Sinfonieorchester ist nach Klangfamilien im Halbrund um den Dirigenten geordnet.", "points": ["Streicher vorn (Violinen, Bratschen, Celli, Kontrabässe).", "Holzbläser dahinter (Flöte, Oboe, Klarinette, Fagott).", "Blech (Horn, Trompete, Posaune, Tuba) und Schlagwerk hinten.", "Konzertmeister = erste Geige, Bindeglied zum Dirigenten."], "more": "Laute Instrumente sitzen hinten, damit die Balance stimmt."}, "Interpretation & Hören": {"lead": "„Gut“ heißt nicht nur fehlerfrei, sondern überzeugend. Daran misst man eine Deutung.", "points": ["Tempo & Spannungsbogen, echte Dynamik-Kontraste.", "Reine Intonation und präzises Ensemble.", "Phrasierung und Klangbalance.", "Eine erkennbare Idee über den ganzen Satz."], "more": "Ohr-Training: dieselbe Stelle in zwei Aufnahmen direkt vergleichen."}, "Oper verstehen": {"lead": "Oper ist gesungenes Drama mit festem Bauplan – wir hören sie vor allem musikalisch.", "points": ["Ouvertüre eröffnet instrumental.", "Rezitativ trägt die Handlung, Arie zeigt Gefühl.", "Ensemble = mehrere Stimmen zugleich.", "Libretto = der Text der Oper."], "more": "Bei Wagner verknüpfen Leitmotive Klänge mit Personen und Ideen."}, "Stimmen & Gesang": {"lead": "Die Singstimme ist ein Instrument – eingeteilt nach Lage und Klangfarbe.", "points": ["Frauen: Sopran (hoch), Mezzo, Alt (tief).", "Männer: Tenor (hoch), Bariton, Bass (tief).", "Held oft Tenor, Gegenspieler/Vater oft Bass.", "Koloratur = virtuose Verzierungen, Belcanto = schöner Liniengesang."], "more": "Musikalisch zählen Intonation, Phrasierung, Dynamik und Timbre."}, "Beste Orchester & Dirigenten": {"lead": "Ein fester Kreis von Klangkörpern gilt als Weltspitze (Stand 2026).", "points": ["Concertgebouw, Berliner & Wiener Philharmoniker, LSO, BR-SO.", "Wien hat bewusst keinen Chefdirigenten.", "Heute u. a. Petrenko (Berlin), Dudamel (New York), Rattle (München).", "Klaus Mäkelä übernimmt ab 2027 Concertgebouw und Chicago."], "more": "Legenden: Karajan, Bernstein, Carlos Kleiber."}, "Fachbegriffe": {"lead": "Die wichtigsten Begriffe kompakt – damit du Texte und Programmhefte verstehst.", "points": ["Pizzicato = zupfen; Tutti = alle spielen.", "Crescendo = lauter werden; Vibrato = schwankende Tonhöhe.", "Sinfonie = großes mehrsätziges Orchesterwerk.", "Fuge = kunstvolle Verarbeitung eines Themas in mehreren Stimmen."], "more": "Italienische Begriffe sind in der Musik internationaler Standard."}}, "mixed": {"Musik": {"lead": "Quer durch Epochen, Orchester und Interpretation.", "points": ["12 zufällige Fragen, kein Zeitdruck.", "Merksatz: Streicher vorn, Blech hinten.", "Rubato lässt Musik atmen."]}, "Oper": {"lead": "Rund um Aufbau, Stimmen und die großen Werke.", "points": ["Arie = Gefühl, Rezitativ = Handlung.", "Stimmen von Sopran bis Bass.", "Leitmotiv = Wagner."]}, "Welt": {"lead": "Spitzenorchester, Dirigenten und Fachbegriffe.", "points": ["Petrenko in Berlin, Wien ohne Chef.", "Mäkelä ab 2027 Concertgebouw & Chicago.", "Pizzicato, Tutti, Sinfonie & Co."]}}, "mixedDefault": {"lead": "Eine bunt gemischte Übungsrunde. Kein Zeitdruck.", "points": ["12 zufällige Fragen aus diesem Bereich.", "Lernkarten zählen auch ohne perfekte Antwort.", "Hören schlägt Auswendiglernen."]}}</script>
+<script id="dl-logic">
+(function(){
+  if(window.__dlInit)return; window.__dlInit=1;
+  var L; try{ L=JSON.parse(document.getElementById('dl-lessons').textContent); }catch(e){ return; }
+  function theme(){
+    var cs=getComputedStyle(document.body);
+    var tab=document.querySelector('#tabs .tab.on')||document.body;
+    var a=getComputedStyle(tab).backgroundColor;
+    return {bg:cs.backgroundColor||'#fff', fg:cs.color||'#222', acc:(a&&a!=='rgba(0, 0, 0, 0)')?a:'#555'};
+  }
+  function soft(fg){ return fg==='rgb(255, 255, 255)'?'rgba(255,255,255,.08)':'rgba(0,0,0,.05)'; }
+  function buildOverlay(kick,title,icon,data){
+    var t=theme();
+    var ov=document.createElement('div'); ov.className='dlov'; ov.style.background=t.bg; ov.style.color=t.fg;
+    var pts=(data.points||[]).map(function(p,i){
+      return "<div class='dlpt' style='background:"+soft(t.fg)+"'><span class='dld' style='background:"+t.acc+"'>"+(i+1)+"</span><span>"+p+"</span></div>";
+    }).join('');
+    var more=data.more?("<div class='dlmore' style='background:"+soft(t.fg)+"'><b>Gut zu wissen</b>"+data.more+"</div>"):'';
+    ov.innerHTML="<div class='dlhead'><div class='dlkick'>"+kick+"</div><div class='dltitle'>"+(icon?icon+' ':'')+title+"</div></div>"
+      +"<div class='dlscroll'><div class='dllead'>"+(data.lead||'')+"</div>"+pts+more+"</div>"
+      +"<div class='dlfoot'><button class='dlgo' style='background:"+t.acc+"'>Los geht’s →</button><button class='dlskip'>Direkt zu den Fragen</button></div>";
+    document.body.appendChild(ov);
+    var prevOv=document.body.style.overflow; document.body.style.overflow='hidden';
+    function close(){ ov.remove(); document.body.style.overflow=prevOv; }
+    ov.querySelector('.dlgo').addEventListener('click',close);
+    ov.querySelector('.dlskip').addEventListener('click',close);
+    ov.querySelector('.dlscroll').scrollTop=0;
+  }
+  var lastPick=null;
+  function cleanTrack(s){ return String(s||'').replace(/[^\p{L}0-9 .\-]/gu,'').trim(); }
+  document.addEventListener('click',function(e){
+    var cat=e.target.closest&&e.target.closest('#catList button.cat');
+    var ban=e.target.closest&&e.target.closest('#bannerSlot .banner');
+    if(!cat&&!ban)return;
+    var tabOn=document.querySelector('#tabs .tab.on');
+    var track=cleanTrack(tabOn&&tabOn.textContent);
+    if(cat){
+      var tx=cat.querySelector('.tx');
+      var nameEl=tx&&(tx.querySelector('b')||tx.firstElementChild);
+      var name=(nameEl?nameEl.textContent:(tx?tx.textContent:'')).replace(/\s*\d+\s*Fragen.*$/,'').trim();
+      var ic=cat.querySelector('.ic');
+      lastPick={kind:'cat',cat:name,track:track,icon:ic?ic.textContent.trim():'',shown:false};
+    } else {
+      lastPick={kind:'mixed',cat:null,track:track,icon:'🎲',shown:false};
+    }
+  },true);
+  var qv=document.getElementById('quizView');
+  if(!qv)return;
+  var wasHidden=qv.classList.contains('hidden');
+  function maybeShow(){
+    if(!lastPick||lastPick.shown)return;
+    var data=null,title='',kick='Lektion';
+    if(lastPick.kind==='cat'){ data=L.cats&&L.cats[lastPick.cat]; title=lastPick.cat; }
+    else { data=(L.mixed&&L.mixed[lastPick.track])||L.mixedDefault; title='Alles gemischt'; kick='Aufwärmen'; }
+    if(!data)return;
+    lastPick.shown=true;
+    buildOverlay(kick,title,lastPick.icon,data);
+  }
+  new MutationObserver(function(){ var h=qv.classList.contains('hidden'); if(wasHidden&&!h)maybeShow(); wasHidden=h; })
+    .observe(qv,{attributes:true,attributeFilter:['class']});
+})();
 </script>
 
 <!-- Nachschlagewerk-Einbindung -->
